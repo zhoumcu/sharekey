@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="m_pink_color">#f9adca</color>
+    <color name="shopping_person_pink_color">#f9abca</color>
+    <color name="dialog_content_color" >#5d5d5d</color>
+    <color name="black">#000000</color>
+    <color name="tar_title_color">#675173</color>
+    <color name="side_bar_text">#4A4A4A</color>
+    <color name="red_color">#e8174d</color>
+    <color name="gray_normal">#cccccc</color>
+</resources>

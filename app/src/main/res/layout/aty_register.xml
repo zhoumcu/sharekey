@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:layout_width="fill_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg"
+    android:layout_height="fill_parent"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:id="@+id/rl_1"
+        android:layout_width="fill_parent"
+        android:layout_height="135.0dip"
+        android:layout_above="@+id/btnSure"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_marginTop="50dp">
+
+        <RelativeLayout
+            android:id="@+id/layoutPhone"
+            android:background="@drawable/selector_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="45.0dip">
+
+            <EditText
+                android:id="@+id/ed_account"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:hint="帐号：3-12个数字或者字母字符"
+                android:maxLength="11"
+                android:paddingLeft="15.0dip"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="18.0sp"
+                />
+
+            <ImageView
+                android:id="@+id/imgCancel"
+                android:layout_width="16.0dip"
+                android:layout_height="16.0dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="12.0dip"
+                android:visibility="invisible" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="45.0dip"
+            android:background="@drawable/selector_bg"
+            android:layout_below="@+id/layoutPhone">
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:background="#a3a3a3"
+                android:id="@+id/imageView" />
+
+            <EditText
+                android:id="@+id/ed_pwd"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:hint="密码 2-12个字符"
+                android:inputType="textPassword"
+                android:maxLength="18"
+                android:paddingLeft="15.0dip"
+                android:textSize="18.0sp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:layout_alignParentTop="true"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="45.0dip"
+            android:background="@drawable/selector_bg"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:background="#a3a3a3" />
+
+            <EditText
+                android:id="@+id/ed_repwd"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:hint="重复密码 "
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="textPassword"
+                android:maxLength="18"
+                android:paddingLeft="15.0dip"
+                android:textSize="18.0sp"
+                android:layout_alignParentTop="true"
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:visibility="gone"
+        android:text="绑定手机号码"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        />
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rl_2"
+        android:layout_width="fill_parent"
+        android:layout_height="90.0dip"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_above="@+id/btnSure"
+        android:layout_centerHorizontal="true"
+        >
+
+        <RelativeLayout
+            android:background="@color/divide"
+            android:layout_width="fill_parent"
+            android:layout_height="45.0dip">
+
+            <EditText
+                android:id="@+id/ed_phone"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:hint="手机号"
+                android:inputType="number"
+                android:maxLength="11"
+                android:paddingLeft="15.0dip"
+                android:singleLine="true"
+                android:textSize="18.0sp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="45.0dip"
+            android:background="@color/divide"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:background="#a3a3a3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="获取验证码"
+                android:padding="10dp"
+                android:id="@+id/btn_sendcode"
+                android:textColor="@color/white"
+                android:background="@color/colorPrimaryDark"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <EditText
+                android:id="@+id/ed_code"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:hint="验证码"
+                android:inputType="textPassword"
+                android:maxLength="18"
+                android:paddingLeft="15.0dip"
+                android:textSize="18.0sp"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/btn_sendcode"
+                android:layout_toStartOf="@+id/btn_sendcode" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+    <TextView
+        android:visibility="gone"
+        android:text="作为找回密码或者帐号凭证"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        />
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip"
+        android:layout_marginLeft="18.0dip"
+        android:layout_marginRight="18.0dip"
+        android:background="@drawable/selector_btn_bg"
+        android:clickable="true"
+        android:enabled="true"
+        android:text="注册"
+        android:textColor="#ffffffff"
+        android:textSize="18.0sp"
+        android:layout_marginTop="10dp"
+        android:layout_above="@+id/btn_pwd"
+        android:layout_centerHorizontal="true" />
+
+</LinearLayout>
