@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:textColor="@color/color_343333"
+    android:padding="20dp"
+    android:gravity="center"
+    android:text="呜呜，没有该数据哦！小哥正在抓紧备货。。。"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />

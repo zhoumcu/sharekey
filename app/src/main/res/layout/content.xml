@@ -1,23 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/unlock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/bt_unlock_selector"
-        android:clickable="true"
-        android:onClick="gotoCodeUnlock"
-        android:paddingBottom="10dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        android:paddingTop="10dp"
-        android:text="@string/unlock"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:alpha="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bike"/>
+        <TextView
+            android:id="@+id/notify"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/notify"
+            android:padding="10dp"
+            android:background="@color/color_bb343333"
+            android:textColor="@color/white_dd"
+            android:textSize="@dimen/text_size" />
+        <ImageView
+            android:id="@+id/btn_light"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:alpha="0.7"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="bottom|right"
+            android:background="@drawable/flashlight_circle_bg"
+            android:src="@mipmap/flashlight_icon" />
+    </FrameLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_f4f3f3"
+        android:orientation="vertical"
+        android:layout_below="@+id/title_layout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/edge_shadow_bg"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <cn.zhiao.baselib.utils.gridpassword.GridPasswordView
+                    android:id="@+id/numView"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    app:gpvTextColor="#2196F3"
+                    app:gpvTextSize="25sp"
+                    app:gpvLineColor="#2196F3"
+                    app:gpvPasswordLength="7"
+                    app:gpvPasswordType="number"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/code_prompt"
+                android:textColor="@color/black_dd"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btn_unlock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bt_book_selector"
+                android:text="@string/unlock_im"
+                android:textColor="@color/white_dd"
+                android:textSize="18sp" />
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bt_book_selector"
+                android:text="@string/save"
+                android:textColor="@color/white_dd"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

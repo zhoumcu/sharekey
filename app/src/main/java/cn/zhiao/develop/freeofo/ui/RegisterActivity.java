@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import butterknife.BindView;
+import butterknife.Bind;
 import butterknife.OnClick;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
@@ -24,29 +24,29 @@ import cn.zhiao.develop.freeofo.bean.User;
 public class RegisterActivity extends BaseActivity {
 
 
-    @BindView(R.id.ed_account)
+    @Bind(R.id.ed_account)
     EditText edAccount;
-    @BindView(R.id.imgCancel)
+    @Bind(R.id.imgCancel)
     ImageView imgCancel;
-    @BindView(R.id.layoutPhone)
+    @Bind(R.id.layoutPhone)
     RelativeLayout layoutPhone;
-    @BindView(R.id.imageView)
+    @Bind(R.id.imageView)
     ImageView imageView;
-    @BindView(R.id.ed_pwd)
+    @Bind(R.id.ed_pwd)
     EditText edPwd;
-    @BindView(R.id.ed_repwd)
+    @Bind(R.id.ed_repwd)
     EditText edRepwd;
-    @BindView(R.id.rl_1)
+    @Bind(R.id.rl_1)
     RelativeLayout rl1;
-    @BindView(R.id.ed_phone)
+    @Bind(R.id.ed_phone)
     EditText edPhone;
-    @BindView(R.id.btn_sendcode)
+    @Bind(R.id.btn_sendcode)
     TextView btnSendcode;
-    @BindView(R.id.ed_code)
+    @Bind(R.id.ed_code)
     EditText edCode;
-    @BindView(R.id.rl_2)
+    @Bind(R.id.rl_2)
     RelativeLayout rl2;
-    @BindView(R.id.btn_register)
+    @Bind(R.id.btn_register)
     Button btnRegister;
     private View rootView;
 

@@ -4,7 +4,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-import butterknife.BindView;
+import butterknife.Bind;
 import butterknife.OnClick;
 import cn.zhiao.baselib.base.BaseActivity;
 import cn.zhiao.baselib.utils.SharedPrefrecesUtils;
@@ -21,9 +21,9 @@ import cn.zhiao.develop.freeofo.interfaces.view.LoginView;
 
 public class LoginAcitvity extends BaseActivity implements LoginView {
 
-    @BindView(R.id.phone)
+    @Bind(R.id.phone)
     EditText phone;
-    @BindView(R.id.tv_pwd)
+    @Bind(R.id.tv_pwd)
     EditText tvPwd;
     private LoginPresenterImpl loginPresenter;
 
