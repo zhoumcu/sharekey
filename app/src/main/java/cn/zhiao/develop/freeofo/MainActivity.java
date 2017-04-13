@@ -6,6 +6,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
@@ -16,11 +17,20 @@ import com.pgyersdk.feedback.PgyFeedback;
 import com.pgyersdk.javabean.AppBean;
 import com.pgyersdk.update.PgyUpdateManager;
 import com.pgyersdk.update.UpdateManagerListener;
+import com.qq.e.ads.banner.ADSize;
+import com.qq.e.ads.banner.AbstractBannerADListener;
+import com.qq.e.ads.banner.BannerView;
+import com.qq.e.ads.interstitial.AbstractInterstitialADListener;
+import com.qq.e.ads.interstitial.InterstitialAD;
 
 import butterknife.Bind;
 import cn.zhiao.baselib.app.BaseApplication;
 import cn.zhiao.baselib.base.BaseActivity;
+import cn.zhiao.baselib.utils.SharedPrefrecesUtils;
+import cn.zhiao.develop.freeofo.bean.Constants;
+import cn.zhiao.develop.freeofo.bean.User;
 import cn.zhiao.develop.freeofo.ui.HomeFragment;
+import cn.zhiao.develop.freeofo.ui.MinePwdActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends BaseActivity {
@@ -31,6 +41,8 @@ public class MainActivity extends BaseActivity {
     CircleImageView userPhoto;
     @Bind(R.id.user_name)
     TextView userName;
+    @Bind(R.id.user_phone)
+    TextView userPhone;
     @Bind(R.id.person_layout)
     RelativeLayout personLayout;
     @Bind(R.id.tv_version)
@@ -40,6 +52,7 @@ public class MainActivity extends BaseActivity {
     @Bind(R.id.containers)
     FrameLayout containers;
     private ActionBarDrawerToggle mDrawerToggle;
+    private User user;
 
     @Override
     public void initView() {
@@ -65,11 +78,66 @@ public class MainActivity extends BaseActivity {
         dlLeft.setDrawerListener(mDrawerToggle);
         tvVersion.setText("V" + BaseApplication.getVersion());
         addFragment(R.id.containers,new HomeFragment());
+        userPhone.setText(user.getUsername());
+        initBanner();
+        initInterstitialAD();
+    }
+
+    private void initInterstitialAD() {
+        /**
+        * 创建插屏广告
+        * "appid"指在 http://e.qq.com/dev/ 能看到的app唯一字符串
+        * "广告位 id" 指在 http://e.qq.com/dev/ 生成的数字串，
+        * 并非 appid 或者 appkey
+        */
+        final InterstitialAD iad = new InterstitialAD(this, Constants.APPID, Constants.InterteristalPosID);
+            iad.setADListener(new AbstractInterstitialADListener() {
+
+                @Override
+                public void onADReceive() {
+                     /*
+                    * 展示插屏广告，仅在回调接口的adreceive事件发生后调用才有效。
+                    */
+                    iad.show();
+                }
+
+                @Override
+                public void onNoAD(int arg0) {
+                    Log.i("AD_DEMO", "LoadInterstitialAd Fail:" + arg0);
+                }
+
+        });
+        //请求插屏广告，每次重新请求都可以调用此方法。
+        iad.loadAD();
+    }
+
+    private void initBanner() {
+        // 创建Banner广告AdView对象
+        // appId : 在 http://e.qq.com/dev/ 能看到的app唯一字符串
+        // posId : 在 http://e.qq.com/dev/ 生成的数字串，并非 appid 或者 appkey
+        BannerView banner = new BannerView(this, ADSize.BANNER, Constants.APPID, Constants.BannerPosID);
+        //设置广告轮播时间，为0或30~120之间的数字，单位为s,0标识不自动轮播
+        banner.setRefresh(30);
+        banner.setADListener(new AbstractBannerADListener() {
+
+            @Override
+            public void onNoAD(int arg0) {
+                Log.i("AD_DEMO", "BannerNoAD，eCode=" + arg0);
+            }
+
+            @Override
+            public void onADReceiv() {
+                Log.i("AD_DEMO", "ONBannerReceive");
+            }
+        });
+        /* 发起广告请求，收到广告数据后会展示数据   */
+        banner.loadAD();
+
     }
 
     @Override
     public void initPresenter() {
-
+        user = (User) SharedPrefrecesUtils.readObject(getContext(),"user");
     }
 
     @Override
@@ -82,7 +150,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void gotoMyRoute(View view) {
-        showToast("火速开发中....");
+        gt(MinePwdActivity.class);
     }
 
     public void gotoInvite(View view) {
@@ -131,4 +199,5 @@ public class MainActivity extends BaseActivity {
                     }
                 });
     }
+
 }

@@ -10,6 +10,7 @@ import cn.zhiao.baselib.base.BaseActivity;
 import cn.zhiao.baselib.utils.SharedPrefrecesUtils;
 import cn.zhiao.develop.freeofo.MainActivity;
 import cn.zhiao.develop.freeofo.R;
+import cn.zhiao.develop.freeofo.bean.User;
 import cn.zhiao.develop.freeofo.interfaces.presenter.LoginPresenterImpl;
 import cn.zhiao.develop.freeofo.interfaces.view.LoginView;
 
@@ -79,10 +80,11 @@ public class LoginAcitvity extends BaseActivity implements LoginView {
     }
 
     @Override
-    public void loginResult(int i, String s) {
+    public void loginResult(User user) {
         showToast("登录成功:");
         gt(MainActivity.class);
         finish();
+        SharedPrefrecesUtils.saveObject(getContext(),"user", user);
         SharedPrefrecesUtils.saveBooleanToSharedPrefrences("is_login",true,getContext());
     }
 }

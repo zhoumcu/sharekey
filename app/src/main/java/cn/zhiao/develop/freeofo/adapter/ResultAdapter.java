@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -22,7 +23,7 @@ import cn.zhiao.develop.freeofo.bean.Keys;
 
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder> {
 
-    private List<Keys> keyses;
+    private List<Keys> keyses = new ArrayList<>();
     private Context context;
 
     public ResultAdapter(Context context, List<Keys> keyses) {

@@ -30,7 +30,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="@null"
-                android:hint="帐号：3-12个数字或者字母字符"
+                android:hint="输入手机号码"
                 android:maxLength="11"
                 android:paddingLeft="15.0dip"
                 android:singleLine="true"
@@ -56,18 +56,12 @@
             android:background="@drawable/selector_bg"
             android:layout_below="@+id/layoutPhone">
 
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="0.5dip"
-                android:background="#a3a3a3"
-                android:id="@+id/imageView" />
-
             <EditText
                 android:id="@+id/ed_pwd"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="@null"
-                android:hint="密码 2-12个字符"
+                android:hint="输入6-12个密码"
                 android:inputType="textPassword"
                 android:maxLength="18"
                 android:paddingLeft="15.0dip"
@@ -86,11 +80,6 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true">
-
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="0.5dip"
-                android:background="#a3a3a3" />
 
             <EditText
                 android:id="@+id/ed_repwd"
@@ -111,14 +100,6 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:visibility="gone"
-        android:text="绑定手机号码"
-        android:layout_margin="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
-        />
 
     <RelativeLayout
         android:visibility="gone"
@@ -193,14 +174,6 @@
 
         </RelativeLayout>
     </RelativeLayout>
-    <TextView
-        android:visibility="gone"
-        android:text="作为找回密码或者帐号凭证"
-        android:layout_margin="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
-        />
     <Button
         android:id="@+id/btn_register"
         android:layout_width="fill_parent"

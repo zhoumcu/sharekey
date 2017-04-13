@@ -1,7 +1,5 @@
 package cn.zhiao.develop.freeofo.presenter.interfaces;
 
-import android.app.DownloadManager;
-
 /**
  * author：Administrator on 2017/4/13 10:09
  * company: xxxx
@@ -10,4 +8,5 @@ import android.app.DownloadManager;
 
 public interface HomePresenter {
     void QueryData(String data);
+    void QueryMyData(String data);
 }

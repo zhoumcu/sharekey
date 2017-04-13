@@ -14,9 +14,11 @@ import butterknife.OnClick;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 import cn.zhiao.baselib.base.BaseFragment;
+import cn.zhiao.baselib.utils.SharedPrefrecesUtils;
 import cn.zhiao.baselib.utils.gridpassword.GridPasswordView;
 import cn.zhiao.develop.freeofo.R;
 import cn.zhiao.develop.freeofo.bean.Keys;
+import cn.zhiao.develop.freeofo.bean.User;
 
 /**
  * author：Administrator on 2017/4/13 09:08
@@ -30,6 +32,7 @@ public class SavePwdFragment extends BaseFragment {
     @Bind(R.id.pswView)
     GridPasswordView pswView;
     private boolean isFlashOpen;
+    private User user;
 
     public static SavePwdFragment newInstance() {
         Bundle args = new Bundle();
@@ -55,7 +58,7 @@ public class SavePwdFragment extends BaseFragment {
 
     @Override
     public void initView() {
-
+        user = (User) SharedPrefrecesUtils.readObject(getContext(),"user");
     }
 
     @Override
@@ -69,6 +72,7 @@ public class SavePwdFragment extends BaseFragment {
             case R.id.btn_save:
                 Keys keys = new Keys();
                 //注意：不能调用gameScore.setObjectId("")方法
+                keys.setUserId(user.getObjectId());
                 keys.setKeyName(pswView.getPassWord().toString());
                 keys.setKeyNumber(numView.getPassWord().toString());
                 keys.save(new SaveListener<String>() {

@@ -30,8 +30,6 @@ public class RegisterActivity extends BaseActivity {
     ImageView imgCancel;
     @Bind(R.id.layoutPhone)
     RelativeLayout layoutPhone;
-    @Bind(R.id.imageView)
-    ImageView imageView;
     @Bind(R.id.ed_pwd)
     EditText edPwd;
     @Bind(R.id.ed_repwd)
@@ -54,28 +52,29 @@ public class RegisterActivity extends BaseActivity {
     public void onClick() {
         close();
         final String edPhone1 = edAccount.getText().toString();
-        if (edAccount.length() <3 || edAccount.length() > 12) {
-            edAccount.setError("帐号长度不对，请输入3-12个字符");
+        if (edAccount.length() < 11 || edAccount.length() > 11) {
+            edAccount.setError("输入手机号码不正确");
             return;
         }
-        if(!edPwd.getText().toString().equals(edRepwd.getText().toString())) {
+        if (edPwd.length() < 6 || edPwd.length() > 12) {
+            edPwd.setError("密码应为6-12位");
+            return;
+        }
+        if (!edPwd.getText().toString().equals(edRepwd.getText().toString())) {
             edRepwd.setError("两次密码输入不对应");
             return;
         }
-        if (edPwd.length() < 5 || edPwd.length() > 12) {
-            edPwd.setError("密码应为5-12位");
-            return;
-        }
         User user = new User();
+        user.setMobilePhoneNumber(edPhone1);
         user.setPassword(edPwd.getText().toString());
         user.setUsername(edPhone1);
         user.signUp(new SaveListener<User>() {
             @Override
             public void done(User s, BmobException e) {
-                if(e==null){
+                if (e == null) {
                     showToast("注册成功");
                     finish();
-                }else{
+                } else {
                     showToast(e.getMessage());
                 }
             }
@@ -96,4 +95,5 @@ public class RegisterActivity extends BaseActivity {
     protected int getLayoutRes() {
         return R.layout.aty_register;
     }
+
 }

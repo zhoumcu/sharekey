@@ -11,6 +11,7 @@ import cn.bmob.v3.BmobObject;
 public class Keys extends BmobObject{
     private String keyName;
     private String keyNumber;
+    private String userId;
 
     public String getKeyName() {
         return keyName;
@@ -26,5 +27,9 @@ public class Keys extends BmobObject{
 
     public void setKeyNumber(String keyNumber) {
         this.keyNumber = keyNumber;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

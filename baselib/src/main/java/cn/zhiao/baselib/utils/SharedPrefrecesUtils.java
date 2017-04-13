@@ -91,7 +91,7 @@ public class SharedPrefrecesUtils {
      * @param obj 要保存的对象，只能保存实现了serializable的对象
      * modified:
      */
-    public void saveObject(Context context,String key ,Object obj){
+    public static void saveObject(Context context,String key ,Object obj){
         try {
             // 保存对象
             android.content.SharedPreferences sp = context.getSharedPreferences(SPFILENAME, Context.MODE_APPEND);
@@ -141,7 +141,7 @@ public class SharedPrefrecesUtils {
      * @return
      * modified:
      */
-    public Object readObject(Context context,String key ){
+    public static Object readObject(Context context,String key ){
         try {
             android.content.SharedPreferences sharedata = context.getSharedPreferences(SPFILENAME, Context.MODE_APPEND);
             if (sharedata.contains(key)) {

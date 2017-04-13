@@ -122,8 +122,8 @@ public  abstract class BaseActivity extends AppCompatActivity implements IBaseVi
             mProgressDialog.setCanceledOnTouchOutside(false);
             mProgressDialog.setMessage(message);
         }
-
-        mProgressDialog.show();
+        if(!mProgressDialog.isShowing())
+            mProgressDialog.show();
     }
 
     @Override

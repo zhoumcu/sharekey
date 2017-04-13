@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
 
+import cn.zhiao.baselib.utils.SharedPrefrecesUtils;
 import cn.zhiao.develop.freeofo.MainActivity;
 import cn.zhiao.develop.freeofo.R;
 import cn.zhiao.develop.freeofo.bean.Constants;
@@ -62,7 +63,11 @@ public class SplashActivity extends Activity implements SplashADListener {
     }
 
     private void next() {
-        this.startActivity(new Intent(this, MainActivity.class));
+        if(SharedPrefrecesUtils.getBooleanFromSharedPrefrences("is_login",this)){
+            this.startActivity(new Intent(this, MainActivity.class));
+        }else{
+            this.startActivity(new Intent(this, LoginAcitvity.class));
+        }
         //防止用户回退看到此页面
         this.finish();
     }
@@ -94,7 +99,7 @@ public class SplashActivity extends Activity implements SplashADListener {
     @Override
     public void onADTick(long millisUntilFinished) {
         Log.i("AD_DEMO", "SplashADTick " + millisUntilFinished + "ms");
-        skipView.setText(String.format(SKIP_TEXT, Math.round(millisUntilFinished / 5000f)));
+        skipView.setText(String.format(SKIP_TEXT, Math.round(millisUntilFinished / 1000f)));
     }
 
     //防止用户返回键退出APP
