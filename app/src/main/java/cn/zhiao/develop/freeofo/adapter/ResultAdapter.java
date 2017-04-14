@@ -21,10 +21,11 @@ import cn.zhiao.develop.freeofo.bean.Keys;
  * email：1032324589@qq.com
  */
 
-public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder> {
+public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Keys> keyses = new ArrayList<>();
     private Context context;
+    private int viewType = 0;
 
     public ResultAdapter(Context context, List<Keys> keyses) {
         this.context = context;
@@ -34,18 +35,39 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
     public ResultAdapter(Context context) {
         this.context = context;
     }
-    public void addAll(List<Keys> keyses){
+
+    public void addAll(List<Keys> keyses) {
         this.keyses = keyses;
         notifyDataSetChanged();
     }
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_keys, parent, false));
+
+    public void setItemViewType(int viewType) {
+        this.viewType = viewType;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.keyPsd.setText("密码：   "+keyses.get(position).getKeyName());
+    public int getItemViewType(int position) {
+        return viewType;
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == 1) {
+            return new ViewHolder2(LayoutInflater.from(context).inflate(R.layout.item_minekeys, parent, false));
+        } else {
+            return new ViewHolder1(LayoutInflater.from(context).inflate(R.layout.item_keys, parent, false));
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if(holder instanceof ViewHolder1){
+            ((ViewHolder1)holder).keyPsd.setText("密码：   " + keyses.get(position).getKeyName());
+        }else if(holder instanceof ViewHolder2){
+            ((ViewHolder2)holder).keyPsd.setText(keyses.get(position).getKeyName());
+            ((ViewHolder2)holder).bike.setText(keyses.get(position).getKeyNumber());
+        }
+
     }
 
     @Override
@@ -53,13 +75,26 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
         return keyses.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    static public class ViewHolder1 extends RecyclerView.ViewHolder {
         @Bind(R.id.keyPsd)
         TextView keyPsd;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder1(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
+        }
+    }
+
+
+    static class ViewHolder2 extends RecyclerView.ViewHolder{
+        @Bind(R.id.bike)
+        TextView bike;
+        @Bind(R.id.keyPsd)
+        TextView keyPsd;
+
+        public ViewHolder2(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

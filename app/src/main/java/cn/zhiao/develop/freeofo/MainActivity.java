@@ -146,7 +146,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void gotoWallet(View view) {
-        showToast("火速开发中....");
+        showToast("下个版本加入该功能....");
     }
 
     public void gotoMyRoute(View view) {

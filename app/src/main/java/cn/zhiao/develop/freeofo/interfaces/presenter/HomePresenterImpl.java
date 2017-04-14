@@ -57,7 +57,7 @@ public class HomePresenterImpl implements HomePresenter {
         //查找Person表里面id为6b6c11c537的数据
         BmobQuery<Keys> bmobQuery = new BmobQuery<Keys>();
         //查询playerName叫“比目”的数据
-        bmobQuery.addWhereEqualTo("objectId", data);
+        bmobQuery.addWhereEqualTo("userId", data);
         //返回50条数据，如果不加上这条语句，默认返回10条数据
         bmobQuery.setLimit(50);
         //执行查询方法

@@ -4,6 +4,7 @@
     android:textColor="@color/color_343333"
     android:padding="20dp"
     android:gravity="center"
-    android:text="呜呜，没有该数据哦！小哥正在抓紧备货。。。"
+    android:background="@color/gray"
+    android:text="@string/errormsg"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />

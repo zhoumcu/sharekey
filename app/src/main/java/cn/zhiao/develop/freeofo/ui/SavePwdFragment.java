@@ -33,6 +33,7 @@ public class SavePwdFragment extends BaseFragment {
     GridPasswordView pswView;
     private boolean isFlashOpen;
     private User user;
+    private Camera m_Camera;
 
     public static SavePwdFragment newInstance() {
         Bundle args = new Bundle();
@@ -70,6 +71,7 @@ public class SavePwdFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_save:
+                showProgress("正在保存......");
                 Keys keys = new Keys();
                 //注意：不能调用gameScore.setObjectId("")方法
                 keys.setUserId(user.getObjectId());
@@ -80,8 +82,10 @@ public class SavePwdFragment extends BaseFragment {
                     @Override
                     public void done(String objectId, BmobException e) {
                         if (e == null) {
+                            hideProgress();
                             showToast("保存密码成功！可以通过<菜单->我的密码>中查询");
                         } else {
+                            hideProgress();
                             showToast("失败：" + e.getMessage() + "," + e.getErrorCode());
                         }
                     }
@@ -89,17 +93,22 @@ public class SavePwdFragment extends BaseFragment {
                 break;
             case R.id.btn_light:
                 if (!isFlashOpen) {
-                    Camera camera = Camera.open();
-                    Camera.Parameters mParameters = camera.getParameters();
-                    mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);//打开Camera.Parameters.FLASH_MODE_OFF则为关闭
-                    camera.setParameters(mParameters);
+                    try{
+                        m_Camera = Camera.open();
+                        Camera.Parameters mParameters;
+                        mParameters = m_Camera.getParameters();
+                        mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                        m_Camera.setParameters(mParameters);
+                    } catch(Exception ex){}
                     isFlashOpen = true;
                 } else {
-                    Camera camera = Camera.open();
-                    Camera.Parameters mParameters = camera.getParameters();
-                    mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);//打开Camera.Parameters.FLASH_MODE_OFF则为关闭
-                    camera.setParameters(mParameters);
-                    camera.release();
+                    try{
+                        Camera.Parameters mParameters;
+                        mParameters = m_Camera.getParameters();
+                        mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                        m_Camera.setParameters(mParameters);
+                        m_Camera.release();
+                    } catch(Exception ex){}
                     isFlashOpen = false;
                 }
                 break;

@@ -1,12 +1,9 @@
 package cn.zhiao.develop.freeofo.ui;
 
 import android.hardware.Camera;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,7 +11,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.zhiao.baselib.base.BaseFragment;
 import cn.zhiao.baselib.utils.gridpassword.GridPasswordView;
@@ -42,6 +38,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
     GridPasswordView numView;
     private HomePresenterImpl presenter;
     private boolean isFlashOpen;
+    private Camera m_Camera;
 
     @Override
     public int getLayoutRes() {
@@ -73,18 +70,22 @@ public class HomeFragment extends BaseFragment implements HomeView {
                 break;
             case R.id.btn_light:
                 if (!isFlashOpen) {
-                    Camera camera = Camera.open();
-                    Camera.Parameters mParameters = camera.getParameters();
-                    mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);//打开Camera.Parameters.FLASH_MODE_OFF则为关闭
-                    camera.setParameters(mParameters);
-                    camera.release();
+                    try{
+                        m_Camera = Camera.open();
+                        Camera.Parameters mParameters;
+                        mParameters = m_Camera.getParameters();
+                        mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                        m_Camera.setParameters(mParameters);
+                    } catch(Exception ex){}
                     isFlashOpen = true;
                 } else {
-                    Camera camera = Camera.open();
-                    Camera.Parameters mParameters = camera.getParameters();
-                    mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);//打开Camera.Parameters.FLASH_MODE_OFF则为关闭
-                    camera.setParameters(mParameters);
-                    camera.release();
+                    try{
+                        Camera.Parameters mParameters;
+                        mParameters = m_Camera.getParameters();
+                        mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                        m_Camera.setParameters(mParameters);
+                        m_Camera.release();
+                    } catch(Exception ex){}
                     isFlashOpen = false;
                 }
                 break;

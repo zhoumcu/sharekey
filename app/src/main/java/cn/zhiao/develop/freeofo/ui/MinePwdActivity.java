@@ -1,5 +1,6 @@
 package cn.zhiao.develop.freeofo.ui;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
@@ -27,10 +28,15 @@ public class MinePwdActivity extends BaseActivity implements HomeView {
 
     @Override
     public void initView() {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
         recycler.setEmptyView(R.layout.error_view);
         recycler.setErrorView(R.layout.error_view);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new ResultAdapter(getContext());
+        adapter.setItemViewType(1);
         recycler.setAdapter(adapter);
     }
 
