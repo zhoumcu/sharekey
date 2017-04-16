@@ -2,8 +2,10 @@ package cn.zhiao.develop.freeofo;
 
 import com.pgyersdk.crash.PgyCrashManager;
 
+import cn.bmob.push.BmobPush;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
+import cn.bmob.v3.BmobInstallation;
 import cn.zhiao.baselib.app.BaseApplication;
 
 /**
@@ -32,5 +34,12 @@ public class App extends BaseApplication{
                 .setFileExpiration(2500)
                 .build();
         Bmob.initialize(config);
+
+        // 初始化BmobSDK
+        Bmob.initialize(this, "25fbbe530d801ab95a2723acf03c50b6");
+        // 使用推送服务时的初始化操作
+        BmobInstallation.getCurrentInstallation().save();
+        // 启动推送服务
+        BmobPush.startWork(this);
     }
 }

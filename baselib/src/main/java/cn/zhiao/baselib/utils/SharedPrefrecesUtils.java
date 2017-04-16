@@ -31,7 +31,7 @@ public class SharedPrefrecesUtils {
     //获取String类型
     public static String getStrFromSharedPrefrences(String key, Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SPFILENAME, Context.MODE_APPEND);
-        return sharedPreferences.getString(key, null);
+        return sharedPreferences.getString(key, "");
     }
 
     //保存Boolean类型

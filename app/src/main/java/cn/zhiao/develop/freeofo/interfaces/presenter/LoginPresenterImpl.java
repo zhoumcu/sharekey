@@ -20,7 +20,7 @@ public class LoginPresenterImpl implements LoginPresenter {
     public void login(EditText eduser, EditText edpassword, final LoginView loginView) {
         //实例化产品模型
         final LoginModel loginModel = new LoginModelImpl();
-        loginView.showProgress();
+        //loginView.showProgress();
         String username = loginModel.verfiyUserName(eduser);
         String password = loginModel.verfiyPassWord(edpassword);
         if(username==null&&password==null) return;
@@ -29,7 +29,7 @@ public class LoginPresenterImpl implements LoginPresenter {
             @Override
             public void onSucess(User data) {
                 loginView.loginResult(data);
-                loginView.hideProgress();
+                //loginView.hideProgress();
             }
 
             @Override

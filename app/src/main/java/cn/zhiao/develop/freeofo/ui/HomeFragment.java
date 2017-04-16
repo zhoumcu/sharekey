@@ -8,14 +8,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 import cn.zhiao.baselib.base.BaseFragment;
+import cn.zhiao.baselib.utils.SharedPrefrecesUtils;
 import cn.zhiao.baselib.utils.gridpassword.GridPasswordView;
 import cn.zhiao.develop.freeofo.R;
+import cn.zhiao.develop.freeofo.bean.Constants;
 import cn.zhiao.develop.freeofo.bean.Keys;
+import cn.zhiao.develop.freeofo.bean.MessageEvent;
 import cn.zhiao.develop.freeofo.interfaces.presenter.HomePresenterImpl;
 import cn.zhiao.develop.freeofo.interfaces.view.HomeView;
 
@@ -47,8 +54,22 @@ public class HomeFragment extends BaseFragment implements HomeView {
 
     @Override
     public void initView() {
-
+        notify.setText(SharedPrefrecesUtils.getStrFromSharedPrefrences(Constants.MSG,getContext()));
+        EventBus.getDefault().register(this);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {/* Do something */
+        SharedPrefrecesUtils.saveStrToSharedPrefrences(Constants.MSG,event.getAlart(),getContext());
+        notify.setText(event.getAlart());
+        logE("客户端收到推送内容"+event.getAlart());
+    };
 
     @Override
     protected void initPresenter() {

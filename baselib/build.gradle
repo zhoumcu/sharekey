@@ -59,4 +59,5 @@ dependencies {
     //compile 'com.jungly:GridPasswordView:0.1'
     //ocr图像识别
     //compile 'com.rmtheis:tess-two:5.4.1'
+    compile 'org.greenrobot:eventbus:3.0.0'
 }

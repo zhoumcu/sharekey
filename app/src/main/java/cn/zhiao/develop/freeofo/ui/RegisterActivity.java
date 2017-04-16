@@ -50,7 +50,7 @@ public class RegisterActivity extends BaseActivity {
 
     @OnClick(R.id.btn_register)
     public void onClick() {
-        close();
+        //close();
         final String edPhone1 = edAccount.getText().toString();
         if (edAccount.length() < 11 || edAccount.length() > 11) {
             edAccount.setError("输入手机号码不正确");

@@ -10,4 +10,6 @@ public class Constants {
   public static final String NativePosID = "5000709048439488";
   public static final String NativeVideoPosID = "2050206699818455";
 
+  public static final String NOTIFY = "NOTIFY";
+  public static final String MSG = "msg";
 }
