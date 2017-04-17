@@ -66,7 +66,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {/* Do something */
-        SharedPrefrecesUtils.saveStrToSharedPrefrences(Constants.MSG,event.getAlart(),getContext());
+
         notify.setText(event.getAlart());
         logE("客户端收到推送内容"+event.getAlart());
     };
