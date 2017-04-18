@@ -2,6 +2,9 @@ package cn.zhiao.develop.freeofo;
 
 import com.pgyersdk.crash.PgyCrashManager;
 
+import org.greenrobot.eventbus.EventBus;
+
+import c.b.BP;
 import cn.bmob.push.BmobPush;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
@@ -20,6 +23,8 @@ public class App extends BaseApplication{
         super.onCreate();
         initBmob();
         PgyCrashManager.register(this);
+        EventBus.builder().throwSubscriberException(BuildConfig.DEBUG).installDefaultEventBus();
+        BP.init("25fbbe530d801ab95a2723acf03c50b6");
     }
     private void initBmob() {
         //第二：自v3.4.7版本开始,设置BmobConfig,允许设置请求超时时间、文件分片上传时每片的大小、文件的过期时间(单位为秒)，

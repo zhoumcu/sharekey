@@ -30,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/phone"
+                android:inputType="phone"
                 android:textColorHint="@color/white_bb"
                 android:textColor="@color/white"
                 android:hint="@string/phone"

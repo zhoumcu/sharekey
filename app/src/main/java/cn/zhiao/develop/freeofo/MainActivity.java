@@ -138,6 +138,26 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initPresenter() {
         user = (User) SharedPrefrecesUtils.readObject(getContext(),"user");
+//        final rx.plugins.RxJavaErrorHandler rxJavaErrorHandler = new rx.plugins.RxJavaErrorHandler() {
+//            @Override
+//            public void handleError( final Throwable x ) {
+//                System.out.println( "rxJavaErrorHandler.handleError: " + x.getClass().getSimpleName() );
+//            }
+//        };
+//        rx.plugins.RxJavaPlugins.getInstance().registerErrorHandler( rxJavaErrorHandler );
+//
+//        final rx.functions.Action1<Long> action = new rx.functions.Action1<Long>() {
+//            @Override
+//            public void call( final Long L ) {
+//                System.out.println( "tick" );
+//                try { Thread.sleep( 2500 ); } catch ( InterruptedException x ) {}
+//            }
+//        };
+//
+//        final rx.Subscription subscription = rx.Observable.interval( 100L, TimeUnit.MILLISECONDS )
+//                .subscribeOn( rx.schedulers.Schedulers.io() )
+//                .observeOn( rx.schedulers.Schedulers.newThread() )
+//                .subscribe( action );
     }
 
     @Override
@@ -147,6 +167,7 @@ public class MainActivity extends BaseActivity {
 
     public void gotoWallet(View view) {
         showToast("下个版本加入该功能....");
+        //gt(PayActivity.class);
     }
 
     public void gotoMyRoute(View view) {

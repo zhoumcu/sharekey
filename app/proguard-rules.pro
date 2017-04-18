@@ -130,3 +130,14 @@
     java.lang.Object writeReplace();
     java.lang.Object readResolve();
 }
+#pgy
+#-libraryjars libs/pgyer_sdk_x.x.jar
+-dontwarn com.pgyersdk.**
+-keep class com.pgyersdk.** { *; }
+#bmob pay
+#-libraryjars libs/BmobPay_v3.1.1_170111.jar
+-keepclasseswithmembers class c.b.** { *; }
+-keep interface c.b.PListener{ *; }
+-keep interface c.b.QListener{ *; }
+
+-keep class com.qq.e.** { *; }

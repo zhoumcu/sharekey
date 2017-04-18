@@ -21,6 +21,7 @@
 
         <RelativeLayout
             android:id="@+id/layoutPhone"
+            android:layout_marginBottom="2dp"
             android:background="@drawable/selector_bg"
             android:layout_width="fill_parent"
             android:layout_height="45.0dip">
@@ -31,9 +32,11 @@
                 android:layout_height="fill_parent"
                 android:background="@null"
                 android:hint="输入手机号码"
+                android:inputType="phone"
                 android:maxLength="11"
                 android:paddingLeft="15.0dip"
                 android:singleLine="true"
+                android:layout_marginBottom="2dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 android:textSize="18.0sp"
@@ -53,6 +56,7 @@
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="45.0dip"
+            android:layout_marginBottom="2dp"
             android:background="@drawable/selector_bg"
             android:layout_below="@+id/layoutPhone">
 
@@ -104,6 +108,7 @@
     <RelativeLayout
         android:visibility="gone"
         android:id="@+id/rl_2"
+        android:layout_marginTop="2dp"
         android:layout_width="fill_parent"
         android:layout_height="90.0dip"
         android:paddingLeft="20dp"

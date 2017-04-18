@@ -60,7 +60,7 @@ public class LoginAcitvity extends BaseActivity implements LoginView {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_login:
-                close();
+                //close();
                 final String phone1 = phone.getText().toString();
                 final String mPassword = tvPwd.getText().toString();
                 if (phone1.length() <= 0) {

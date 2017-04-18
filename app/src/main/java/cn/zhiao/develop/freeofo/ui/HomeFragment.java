@@ -1,6 +1,7 @@
 package cn.zhiao.develop.freeofo.ui;
 
 import android.hardware.Camera;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -53,9 +54,16 @@ public class HomeFragment extends BaseFragment implements HomeView {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    @Override
     public void initView() {
         notify.setText(SharedPrefrecesUtils.getStrFromSharedPrefrences(Constants.MSG,getContext()));
-        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -65,8 +73,8 @@ public class HomeFragment extends BaseFragment implements HomeView {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(MessageEvent event) {/* Do something */
-
+    public void onMessageEvent(MessageEvent event) {
+        /* Do something */
         notify.setText(event.getAlart());
         logE("客户端收到推送内容"+event.getAlart());
     };
