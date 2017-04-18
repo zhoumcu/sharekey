@@ -60,5 +60,4 @@ dependencies {
     //推送
     compile 'com.pgyersdk:sdk:2.5.6'
 
-
 }

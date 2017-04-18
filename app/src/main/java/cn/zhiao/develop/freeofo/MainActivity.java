@@ -1,22 +1,16 @@
 package cn.zhiao.develop.freeofo;
 
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.pgyersdk.feedback.PgyFeedback;
-import com.pgyersdk.javabean.AppBean;
-import com.pgyersdk.update.PgyUpdateManager;
-import com.pgyersdk.update.UpdateManagerListener;
 import com.qq.e.ads.banner.ADSize;
 import com.qq.e.ads.banner.AbstractBannerADListener;
 import com.qq.e.ads.banner.BannerView;
@@ -24,6 +18,7 @@ import com.qq.e.ads.interstitial.AbstractInterstitialADListener;
 import com.qq.e.ads.interstitial.InterstitialAD;
 
 import butterknife.Bind;
+import cn.bmob.v3.update.BmobUpdateAgent;
 import cn.zhiao.baselib.app.BaseApplication;
 import cn.zhiao.baselib.base.BaseActivity;
 import cn.zhiao.baselib.utils.SharedPrefrecesUtils;
@@ -56,6 +51,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        BmobUpdateAgent.update(this);
         //setToolbar(toolbar);
         tlCustom.setTitle("共享密码");//设置Toolbar标题
         tlCustom.setTitleTextColor(Color.parseColor("#ffffff")); //设置标题颜色
@@ -196,29 +192,30 @@ public class MainActivity extends BaseActivity {
     }
 
     private void update() {
-        PgyUpdateManager.register(this, "",
-                new UpdateManagerListener() {
-                    @Override
-                    public void onUpdateAvailable(final String result) {
-                        // 将新版本信息封装到AppBean中
-                        final AppBean appBean = getAppBeanFromString(result);
-                        new AlertDialog.Builder(MainActivity.this)
-                                .setTitle("更新")
-                                .setMessage(appBean.getReleaseNote())
-                                .setNegativeButton("确定",
-                                        new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                startDownloadTask(MainActivity.this, appBean.getDownloadURL());
-                                            }
-                                        }).show();
-                    }
-
-                    @Override
-                    public void onNoUpdateAvailable() {
-                        Toast.makeText(MainActivity.this, "没有新版本！", Toast.LENGTH_SHORT).show();
-                    }
-                });
+//        PgyUpdateManager.register(this, "",
+//                new UpdateManagerListener() {
+//                    @Override
+//                    public void onUpdateAvailable(final String result) {
+//                        // 将新版本信息封装到AppBean中
+//                        final AppBean appBean = getAppBeanFromString(result);
+//                        new AlertDialog.Builder(MainActivity.this)
+//                                .setTitle("更新")
+//                                .setMessage(appBean.getReleaseNote())
+//                                .setNegativeButton("确定",
+//                                        new DialogInterface.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(DialogInterface dialog, int which) {
+//                                                startDownloadTask(MainActivity.this, appBean.getDownloadURL());
+//                                            }
+//                                        }).show();
+//                    }
+//
+//                    @Override
+//                    public void onNoUpdateAvailable() {
+//                        Toast.makeText(MainActivity.this, "没有新版本！", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+        BmobUpdateAgent.forceUpdate(getContext());
     }
 
 }

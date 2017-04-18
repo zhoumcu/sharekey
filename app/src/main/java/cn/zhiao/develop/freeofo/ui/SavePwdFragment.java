@@ -4,6 +4,7 @@ import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +72,14 @@ public class SavePwdFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_save:
+                if(TextUtils.isEmpty(numView.getPassWord().toString())||numView.getPassWord().toString().length()<7){
+                    showToast("车牌号码不能为空或者输入不对！");
+                    return;
+                }
+                if(TextUtils.isEmpty(pswView.getPassWord().toString())||pswView.getPassWord().toString().length()<4){
+                    showToast("密码不能为空！");
+                    return;
+                }
                 showProgress("正在保存......");
                 Keys keys = new Keys();
                 //注意：不能调用gameScore.setObjectId("")方法

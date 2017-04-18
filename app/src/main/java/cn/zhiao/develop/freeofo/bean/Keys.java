@@ -12,6 +12,25 @@ public class Keys extends BmobObject{
     private String keyName;
     private String keyNumber;
     private String userId;
+    private int rightNum = 1;
+
+    public int getWrongNum() {
+        return wrongNum;
+    }
+
+    public void setWrongNum(int wrongNum) {
+        this.wrongNum = wrongNum;
+    }
+
+    public int getRightNum() {
+        return rightNum;
+    }
+
+    public void setRightNum(int rightNum) {
+        this.rightNum = rightNum;
+    }
+
+    private int wrongNum = 1;
 
     public String getKeyName() {
         return keyName;

@@ -6,12 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
+import cn.zhiao.baselib.utils.L;
 import cn.zhiao.develop.freeofo.R;
 import cn.zhiao.develop.freeofo.bean.Keys;
 
@@ -60,12 +64,100 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if(holder instanceof ViewHolder1){
-            ((ViewHolder1)holder).keyPsd.setText("密码：   " + keyses.get(position).getKeyName());
-        }else if(holder instanceof ViewHolder2){
-            ((ViewHolder2)holder).keyPsd.setText(keyses.get(position).getKeyName());
-            ((ViewHolder2)holder).bike.setText(keyses.get(position).getKeyNumber());
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        if (holder instanceof ViewHolder1) {
+            ((ViewHolder1) holder).keyPsd.setText("密码：   " + keyses.get(position).getKeyName());
+            float right = (float)keyses.get(position).getRightNum();
+            float wrong = (float)keyses.get(position).getWrongNum();
+            String rate = (int)((right/(right+wrong))*100)+"%";
+            ((ViewHolder1) holder).tvRate.setText(rate);
+            ((ViewHolder1) holder).btnWrong.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Keys keys = keyses.get(position);
+                    int number = keys.getWrongNum() + 1;
+                    keys.setWrongNum(number);
+                    keys.update(keys.getObjectId(), new UpdateListener() {
+
+                        @Override
+                        public void done(BmobException e) {
+                            if (e == null) {
+                                L.i("bmob", "更新成功");
+                                Toast.makeText(context,"更新成功+1",Toast.LENGTH_SHORT).show();
+                            } else {
+                                L.i("bmob", "更新失败：" + e.getMessage() + "," + e.getErrorCode());
+                            }
+                        }
+                    });
+                }
+            });
+            ((ViewHolder1) holder).btnRight.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Keys keys = keyses.get(position);
+                    int number = keys.getRightNum() + 1;
+                    keys.setRightNum(number);
+                    keys.update(keys.getObjectId(), new UpdateListener() {
+
+                        @Override
+                        public void done(BmobException e) {
+                            if (e == null) {
+                                L.i("bmob", "更新成功");
+                                Toast.makeText(context,"更新成功+1",Toast.LENGTH_SHORT).show();
+                            } else {
+                                L.i("bmob", "更新失败：" + e.getMessage() + "," + e.getErrorCode());
+                            }
+                        }
+                    });
+                }
+            });
+        } else if (holder instanceof ViewHolder2) {
+            ((ViewHolder2) holder).keyPsd.setText(keyses.get(position).getKeyName());
+            ((ViewHolder2) holder).bike.setText(keyses.get(position).getKeyNumber());
+            float right = (float)keyses.get(position).getRightNum();
+            float wrong = (float)keyses.get(position).getWrongNum();
+            String rate = (int)((right/(right+wrong))*100)+"%";
+            ((ViewHolder2) holder).tvRate.setText(rate);
+            ((ViewHolder2) holder).btnWrong.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Keys keys = keyses.get(position);
+                    int number = keys.getWrongNum() + 1;
+                    keys.setWrongNum(number);
+                    keys.update(keyses.get(position).getObjectId(), new UpdateListener() {
+
+                        @Override
+                        public void done(BmobException e) {
+                            if (e == null) {
+                                L.i("bmob", "更新成功");
+                                Toast.makeText(context,"更新成功+1",Toast.LENGTH_SHORT).show();
+                            } else {
+                                L.i("bmob", "更新失败：" + e.getMessage() + "," + e.getErrorCode());
+                            }
+                        }
+                    });
+                }
+            });
+            ((ViewHolder2) holder).btnRight.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Keys keys = keyses.get(position);
+                    int number = keys.getRightNum() + 1;
+                    keys.setRightNum(number);
+                    keys.update(keyses.get(position).getObjectId(), new UpdateListener() {
+
+                        @Override
+                        public void done(BmobException e) {
+                            if (e == null) {
+                                L.i("bmob", "更新成功");
+                                Toast.makeText(context,"更新成功+1",Toast.LENGTH_SHORT).show();
+                            } else {
+                                L.i("bmob", "更新失败：" + e.getMessage() + "," + e.getErrorCode());
+                            }
+                        }
+                    });
+                }
+            });
         }
 
     }
@@ -78,6 +170,12 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     static public class ViewHolder1 extends RecyclerView.ViewHolder {
         @Bind(R.id.keyPsd)
         TextView keyPsd;
+        @Bind(R.id.tv_rate)
+        TextView tvRate;
+        @Bind(R.id.btn_wrong)
+        TextView btnWrong;
+        @Bind(R.id.btn_right)
+        TextView btnRight;
 
         public ViewHolder1(View itemView) {
             super(itemView);
@@ -86,11 +184,17 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
 
-    static class ViewHolder2 extends RecyclerView.ViewHolder{
+    static class ViewHolder2 extends RecyclerView.ViewHolder {
         @Bind(R.id.bike)
         TextView bike;
         @Bind(R.id.keyPsd)
         TextView keyPsd;
+        @Bind(R.id.tv_rate)
+        TextView tvRate;
+        @Bind(R.id.btn_wrong)
+        TextView btnWrong;
+        @Bind(R.id.btn_right)
+        TextView btnRight;
 
         public ViewHolder2(View itemView) {
             super(itemView);

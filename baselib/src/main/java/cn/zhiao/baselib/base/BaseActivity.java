@@ -21,6 +21,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
+
 import java.util.Locale;
 
 import butterknife.ButterKnife;
@@ -56,6 +58,16 @@ public  abstract class BaseActivity extends AppCompatActivity implements IBaseVi
         initPresenter();
         initView();
     }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
 
     protected abstract @LayoutRes int getLayoutRes();
 

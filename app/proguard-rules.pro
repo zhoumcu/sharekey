@@ -141,3 +141,11 @@
 -keep interface c.b.QListener{ *; }
 
 -keep class com.qq.e.** { *; }
+
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}

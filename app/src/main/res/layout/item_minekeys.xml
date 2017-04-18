@@ -18,6 +18,7 @@
         <TextView
             android:id="@+id/bike"
             android:text="45132132"
+            android:textSize="20sp"
             android:padding="10dp"
             android:textColor="@color/black"
             android:layout_width="match_parent"
@@ -39,6 +40,48 @@
             android:padding="10dp"
             android:textColor="@color/black"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="正确率："
+            android:padding="10dp"
+            android:textColor="@color/black_99"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_rate"
+            android:text="100%"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/btn_wrong"
+            android:padding="15dp"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:drawableRight="@mipmap/wrong1"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/btn_right"
+            android:padding="15dp"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:drawableRight="@mipmap/right"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
 </LinearLayout>

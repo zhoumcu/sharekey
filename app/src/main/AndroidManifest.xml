@@ -113,6 +113,15 @@
                 android:resource="@xml/provider_paths"/>
         </provider>
 
+        <meta-data android:value="58f5f3919f06fd2cb8001b50" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="PGY" android:name="UMENG_CHANNEL"/>
+
+        <meta-data android:value="Bmob" android:name="BMOB_CHANNEL"/>
+
+        <activity
+            android:name="cn.bmob.v3.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
     </application>
 
 </manifest>
