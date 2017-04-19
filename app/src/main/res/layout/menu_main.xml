@@ -64,7 +64,32 @@
             android:layout_marginRight="35dp"
             android:layout_marginTop="50dp"
             android:orientation="vertical">
+            <LinearLayout style="@style/menu_layout_style"
+                android:onClick="gotoWork">
 
+                <ImageView
+                    style="@style/menu_icon_style"
+                    android:src="@mipmap/feedback" />
+
+                <TextView
+                    style="@style/menu_text_style"
+                    android:text="@string/feedwork" />
+
+                <TextView
+                    style="@style/menu_text_style"
+                    android:textSize="11sp"
+                    android:layout_gravity="top"
+                    android:text="@string/contants" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <ImageView style="@style/menu_right_arrow_style" />
+            </LinearLayout>
+
+            <View style="@style/menu_divider_style" />
             <LinearLayout
                 style="@style/menu_layout_style"
                 android:onClick="gotoWallet">
@@ -161,13 +186,22 @@
 
                 <TextView
                     style="@style/menu_text_style"
-                    android:text="@string/guide" />
+                    android:text="@string/guide"
+                    android:drawablePadding="5dp" />
+
                 <TextView
                     style="@style/menu_text_style"
                     android:text="@string/version"
                     android:id="@+id/tv_version"
                     android:textSize = "12sp"
                     android:layout_weight="1"/>
+                <TextView
+                    style="@style/menu_text_style"
+                    android:layout_gravity="top"
+                    android:id="@+id/version_notify"
+                    android:drawablePadding="5dp"
+                    android:visibility="gone"
+                    android:drawableRight="@drawable/shape_red_notify"/>
 
                 <ImageView style="@style/menu_right_arrow_style" />
             </LinearLayout>

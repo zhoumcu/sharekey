@@ -10,7 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.pgyersdk.feedback.PgyFeedback;
+import com.avos.avoscloud.feedback.FeedbackAgent;
 import com.qq.e.ads.banner.ADSize;
 import com.qq.e.ads.banner.AbstractBannerADListener;
 import com.qq.e.ads.banner.BannerView;
@@ -18,7 +18,9 @@ import com.qq.e.ads.interstitial.AbstractInterstitialADListener;
 import com.qq.e.ads.interstitial.InterstitialAD;
 
 import butterknife.Bind;
+import cn.bmob.v3.listener.BmobUpdateListener;
 import cn.bmob.v3.update.BmobUpdateAgent;
+import cn.bmob.v3.update.UpdateResponse;
 import cn.zhiao.baselib.app.BaseApplication;
 import cn.zhiao.baselib.base.BaseActivity;
 import cn.zhiao.baselib.utils.SharedPrefrecesUtils;
@@ -42,16 +44,34 @@ public class MainActivity extends BaseActivity {
     RelativeLayout personLayout;
     @Bind(R.id.tv_version)
     TextView tvVersion;
+    @Bind(R.id.version_notify)
+    TextView versionNotify;
     @Bind(R.id.dl_left)
     DrawerLayout dlLeft;
     @Bind(R.id.containers)
     FrameLayout containers;
     private ActionBarDrawerToggle mDrawerToggle;
     private User user;
+    private FeedbackAgent agent;
 
     @Override
     public void initView() {
         BmobUpdateAgent.update(this);
+        BmobUpdateAgent.setUpdateListener(new BmobUpdateListener() {
+            @Override
+            public void onUpdateReturned(int updateStatus, UpdateResponse updateInfo) {
+                // TODO Auto-generated method stub
+                //根据updateStatus来判断更新是否成功
+                logE(updateStatus+updateInfo.toString());
+                if(updateStatus==0){
+                    versionNotify.setVisibility(View.VISIBLE);
+                }else{
+                    versionNotify.setVisibility(View.GONE);
+                }
+            }
+        });
+        agent = new FeedbackAgent(getContext());
+        agent.sync();
         //setToolbar(toolbar);
         tlCustom.setTitle("共享密码");//设置Toolbar标题
         tlCustom.setTitleTextColor(Color.parseColor("#ffffff")); //设置标题颜色
@@ -77,6 +97,13 @@ public class MainActivity extends BaseActivity {
         userPhone.setText(user.getUsername());
         initBanner();
         initInterstitialAD();
+
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                ExcelUtils.readExcel();
+//            }
+//        }).start();
     }
 
     private void initInterstitialAD() {
@@ -175,14 +202,17 @@ public class MainActivity extends BaseActivity {
     }
 
     public void gotoFeedBack(View view) {
-        // 以对话框的形式弹出
-        PgyFeedback.getInstance().showDialog(getContext());
-        // 以Activity的形式打开，这种情况下必须在AndroidManifest.xml配置FeedbackActivity
-        // 打开沉浸式,默认为false
-        // FeedbackActivity.setBarImmersive(true);
-        PgyFeedback.getInstance().showActivity(getContext());
+//        // 以对话框的形式弹出
+//        PgyFeedback.getInstance().showDialog(getContext());
+//        // 以Activity的形式打开，这种情况下必须在AndroidManifest.xml配置FeedbackActivity
+//        // 打开沉浸式,默认为false
+//        // FeedbackActivity.setBarImmersive(true);
+//        PgyFeedback.getInstance().showActivity(getContext());
+        agent.startDefaultThreadActivity();
     }
-
+    public void gotoWork(View view) {
+        agent.startDefaultThreadActivity();
+    }
     public void gotoUpate(View view) {
         update();
     }

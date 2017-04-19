@@ -28,60 +28,71 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:text="密码："
-            android:padding="10dp"
-            android:textColor="@color/black_99"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/keyPsd"
-            android:text="123sdfsd4"
-            android:padding="10dp"
-            android:textColor="@color/black"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="密码："
+                android:padding="10dp"
+                android:textColor="@color/black_99"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/keyPsd"
+                android:text="123sdfsd4"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="正确率："
+                android:padding="10dp"
+                android:textColor="@color/black_99"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_rate"
+                android:text="100%"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="正确率："
-            android:padding="10dp"
-            android:textColor="@color/black_99"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_rate"
-            android:text="100%"
-            android:padding="10dp"
-            android:textColor="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <LinearLayout
+        android:gravity="center"
+        android:background="@color/color_44747474"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/btn_wrong"
-            android:padding="15dp"
+            android:padding="10dp"
             android:textSize="18sp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
+            android:text="错误"
+            android:gravity="center"
+            android:background="@color/color_44747474"
             android:drawableRight="@mipmap/wrong1"
             android:textColor="@color/white"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/btn_right"
-            android:padding="15dp"
+            android:padding="10dp"
             android:textSize="18sp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
+            android:text="正确"
+            android:layout_marginLeft="20dp"
+            android:background="@color/color_44747474"
+            android:gravity="center_vertical"
             android:drawableRight="@mipmap/right"
             android:textColor="@color/white"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
 </LinearLayout>

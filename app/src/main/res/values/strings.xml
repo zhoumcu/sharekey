@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">共享密码</string>
+    <string name="app_name">共享</string>
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="unlock">输码解密</string>
     <string name="wallet">我的补贴</string>
     <string name="route">我的密码</string>
     <string name="invite_friend">邀请好友</string>
-    <string name="feedback">问题反馈</string>
+    <string name="feedback">联系我们/合作加盟</string>
     <string name="guide">版本更新</string>
     <string name="setting">设置</string>
     <string name="version">V1.0.0</string>
@@ -22,4 +22,6 @@
     <string name="notify">好消息！！！！还在为优惠券发愁？你已经out了，ofo进入免费时代来临！</string>
     <string name="code_password">输入密码，以便下次使用</string>
     <string name="errormsg"><![CDATA[>>呜呜，没有该数据哦！小哥正在抓紧备货。。。下个版本将推出你骑车小哥买单优惠活动，敬请期待<<]]></string>
+    <string name="feedwork">点击办证</string>
+    <string name="contants">QQ2939667786\n微信A135610529</string>
 </resources>

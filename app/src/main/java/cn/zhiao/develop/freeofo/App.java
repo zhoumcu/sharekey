@@ -1,13 +1,17 @@
 package cn.zhiao.develop.freeofo;
 
+import com.avos.avoscloud.AVOSCloud;
 import com.pgyersdk.crash.PgyCrashManager;
 
 import org.greenrobot.eventbus.EventBus;
 
 import c.b.BP;
+import cn.bmob.push.BmobPush;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
+import cn.bmob.v3.BmobInstallation;
 import cn.bmob.v3.update.BmobUpdateAgent;
+import cn.zhiao.baselib.BuildConfig;
 import cn.zhiao.baselib.app.BaseApplication;
 
 /**
@@ -24,8 +28,9 @@ public class App extends BaseApplication{
         PgyCrashManager.register(this);
         EventBus.builder().throwSubscriberException(BuildConfig.DEBUG).installDefaultEventBus();
         BP.init("25fbbe530d801ab95a2723acf03c50b6");
-//        BmobUpdateAgent.initAppVersion();
-        BmobUpdateAgent.setUpdateOnlyWifi(false);
+        AVOSCloud.initialize(this,"YN8irJOPJnWukhHem1BSl7qY-gzGzoHsz","9ToLV1p8ous2eOj9Paje8Umt");
+        // 放在 SDK 初始化语句 AVOSCloud.initialize() 后面，只需要调用一次即可
+        AVOSCloud.setDebugLogEnabled(true);
     }
     private void initBmob() {
         //第二：自v3.4.7版本开始,设置BmobConfig,允许设置请求超时时间、文件分片上传时每片的大小、文件的过期时间(单位为秒)，
@@ -42,10 +47,13 @@ public class App extends BaseApplication{
         Bmob.initialize(config);
 
         // 初始化BmobSDK
-//        Bmob.initialize(this, "25fbbe530d801ab95a2723acf03c50b6");
-//        // 使用推送服务时的初始化操作
-//        BmobInstallation.getCurrentInstallation().save();
-//        // 启动推送服务
-//        BmobPush.startWork(this);
+        Bmob.initialize(this, "25fbbe530d801ab95a2723acf03c50b6");
+        // 使用推送服务时的初始化操作
+        BmobInstallation.getCurrentInstallation().save();
+        // 启动推送服务
+        BmobPush.startWork(this);
+
+//        BmobUpdateAgent.initAppVersion();
+        BmobUpdateAgent.setUpdateOnlyWifi(false);
     }
 }
