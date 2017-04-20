@@ -1,6 +1,7 @@
 package cn.zhiao.develop.freeofo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import cn.bmob.v3.listener.UpdateListener;
 import cn.zhiao.baselib.utils.L;
 import cn.zhiao.develop.freeofo.R;
 import cn.zhiao.develop.freeofo.bean.Keys;
+import cn.zhiao.develop.freeofo.ui.PayForMeActivity;
 
 /**
  * author：Administrator on 2017/4/13 10:38
@@ -70,7 +72,7 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             float right = (float)keyses.get(position).getRightNum();
             float wrong = (float)keyses.get(position).getWrongNum();
             String rate = (int)((right/(right+wrong))*100)+"%";
-            ((ViewHolder1) holder).tvRate.setText(rate);
+            ((ViewHolder1) holder).tvRate.setText("正确率："+rate);
             ((ViewHolder1) holder).btnWrong.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -109,6 +111,13 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                             }
                         }
                     });
+                }
+            });
+            ((ViewHolder1) holder).btnPay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, PayForMeActivity.class);
+                    context.startActivity(intent);
                 }
             });
         } else if (holder instanceof ViewHolder2) {
@@ -176,6 +185,8 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         TextView btnWrong;
         @Bind(R.id.btn_right)
         TextView btnRight;
+        @Bind(R.id.btn_pay)
+        TextView btnPay;
 
         public ViewHolder1(View itemView) {
             super(itemView);
@@ -195,6 +206,7 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         TextView btnWrong;
         @Bind(R.id.btn_right)
         TextView btnRight;
+
 
         public ViewHolder2(View itemView) {
             super(itemView);

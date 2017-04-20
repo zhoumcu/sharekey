@@ -1,6 +1,8 @@
 package cn.zhiao.develop.freeofo.ui;
 
+import android.content.Intent;
 import android.hardware.Camera;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -18,6 +20,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 import cn.zhiao.baselib.base.BaseFragment;
+import cn.zhiao.baselib.utils.CommonUtil;
 import cn.zhiao.baselib.utils.SharedPrefrecesUtils;
 import cn.zhiao.baselib.utils.gridpassword.GridPasswordView;
 import cn.zhiao.develop.freeofo.R;
@@ -47,6 +50,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
     private HomePresenterImpl presenter;
     private boolean isFlashOpen;
     private Camera m_Camera;
+    private String url;
 
     @Override
     public int getLayoutRes() {
@@ -63,7 +67,9 @@ public class HomeFragment extends BaseFragment implements HomeView {
 
     @Override
     public void initView() {
-        notify.setText(SharedPrefrecesUtils.getStrFromSharedPrefrences(Constants.MSG,getContext()));
+        url = CommonUtil.getCompleteUrl(getResources().getString(R.string.notify));
+        notify.setText(SharedPrefrecesUtils.getStrFromSharedPrefrences(Constants.MSG,getContext())==""?
+                getResources().getString(R.string.notify):SharedPrefrecesUtils.getStrFromSharedPrefrences(Constants.MSG,getContext()));
     }
 
     @Override
@@ -76,6 +82,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
     public void onMessageEvent(MessageEvent event) {
         /* Do something */
         notify.setText(event.getAlart());
+        url =  CommonUtil.getCompleteUrl(event.getAlart());
         logE("客户端收到推送内容"+event.getAlart());
     };
 
@@ -84,7 +91,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
         presenter = new HomePresenterImpl(getContext(), this);
     }
 
-    @OnClick({R.id.btn_unlock, R.id.btn_save, R.id.btn_light})
+    @OnClick({R.id.btn_unlock, R.id.btn_save, R.id.btn_light,R.id.notify})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_unlock:
@@ -116,6 +123,14 @@ public class HomeFragment extends BaseFragment implements HomeView {
                         m_Camera.release();
                     } catch(Exception ex){}
                     isFlashOpen = false;
+                }
+                break;
+            case R.id.notify:
+                showToast("click");
+                if(!TextUtils.isEmpty(url)){
+                    Uri uri = Uri.parse(url);
+                    Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(it);
                 }
                 break;
         }

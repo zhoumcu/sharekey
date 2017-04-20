@@ -99,6 +99,18 @@ public class CommonUtil {
         else
             return false;
     }
+    /**
+     * //获取完整的域名
+     *
+     * @param text 获取浏览器分享出来的text文本
+     */
+    public static String getCompleteUrl(String text) {
+        Pattern p = Pattern.compile("((http|ftp|https)://)(([a-zA-Z0-9\\._-]+\\.[a-zA-Z]{2,6})|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,4})*(/[a-zA-Z0-9\\&%_\\./-~-]*)?", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = p.matcher(text);
+        matcher.find();
+        System.out.println(matcher.group());
+        return matcher.group();
+    }
 
     /**
      *          * 将px值转换为sp值，保证文字大小不变

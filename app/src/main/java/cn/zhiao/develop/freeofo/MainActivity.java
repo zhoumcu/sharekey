@@ -28,6 +28,7 @@ import cn.zhiao.develop.freeofo.bean.Constants;
 import cn.zhiao.develop.freeofo.bean.User;
 import cn.zhiao.develop.freeofo.ui.HomeFragment;
 import cn.zhiao.develop.freeofo.ui.MinePwdActivity;
+import cn.zhiao.develop.freeofo.ui.PayChoocesActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends BaseActivity {
@@ -189,8 +190,8 @@ public class MainActivity extends BaseActivity {
     }
 
     public void gotoWallet(View view) {
-        showToast("下个版本加入该功能....");
-        //gt(PayActivity.class);
+//        showToast("下个版本加入该功能....");
+        gt(PayChoocesActivity.class);
     }
 
     public void gotoMyRoute(View view) {

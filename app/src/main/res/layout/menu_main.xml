@@ -64,6 +64,33 @@
             android:layout_marginRight="35dp"
             android:layout_marginTop="50dp"
             android:orientation="vertical">
+            <LinearLayout
+                style="@style/menu_layout_style"
+                android:onClick="gotoWallet">
+
+                <ImageView
+                    style="@style/menu_icon_style"
+                    android:src="@mipmap/wallet" />
+
+                <TextView
+                    style="@style/menu_text_style"
+                    android:text="@string/wallet" />
+                <TextView
+                    style="@style/menu_text_style"
+                    android:textColor="@color/red"
+                    android:textSize="11sp"
+                    android:layout_gravity="center"
+                    android:text="@string/tip" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <ImageView style="@style/menu_right_arrow_style" />
+            </LinearLayout>
+
+            <View style="@style/menu_divider_style" />
+
             <LinearLayout style="@style/menu_layout_style"
                 android:onClick="gotoWork">
 
@@ -90,27 +117,7 @@
             </LinearLayout>
 
             <View style="@style/menu_divider_style" />
-            <LinearLayout
-                style="@style/menu_layout_style"
-                android:onClick="gotoWallet">
 
-                <ImageView
-                    style="@style/menu_icon_style"
-                    android:src="@mipmap/wallet" />
-
-                <TextView
-                    style="@style/menu_text_style"
-                    android:text="@string/wallet" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <ImageView style="@style/menu_right_arrow_style" />
-            </LinearLayout>
-
-            <View style="@style/menu_divider_style" />
 
 
             <LinearLayout

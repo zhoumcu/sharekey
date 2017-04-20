@@ -20,8 +20,8 @@ android {
         applicationId "cn.zhiao.develop.freeofo"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 9
-        versionName "1.0.9"
+        versionCode 10
+        versionName "1.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -44,6 +44,11 @@ android {
                 def fileName = "共享${defaultConfig.versionName}_${releaseTime()}_debug.apk"
                 output.outputFile = new File(outputFile.parent, fileName)
             }
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
         }
     }
 }

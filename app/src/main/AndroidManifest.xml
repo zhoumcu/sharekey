@@ -45,6 +45,10 @@
             android:theme="@style/AppNoTheme"/>
         <activity android:name=".ui.MinePwdActivity"
             android:label="我的密码"/>
+        <activity android:name=".ui.PayChoocesActivity"
+            android:label="支付"/>
+        <activity android:name=".ui.PayForMeActivity"
+            android:label="打赏作者"/>
         <!-- 可选-->
         <activity android:name="com.pgyersdk.activity.FeedbackActivity"/>
         <!-- 必选-->
