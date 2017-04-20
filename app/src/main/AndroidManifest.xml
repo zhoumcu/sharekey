@@ -117,9 +117,6 @@
                 android:resource="@xml/provider_paths"/>
         </provider>
 
-        <meta-data android:value="58f5f3919f06fd2cb8001b50" android:name="UMENG_APPKEY"/>
-        <meta-data android:value="PGY" android:name="UMENG_CHANNEL"/>
-
         <meta-data android:value="Bmob" android:name="BMOB_CHANNEL"/>
 
         <activity
@@ -130,6 +127,20 @@
         <activity
             android:name="com.avos.avoscloud.feedback.ThreadActivity">
         </activity>
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="58f5f3919f06fd2cb8001b50">
+        </meta-data>
+
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="b58cbd1ce3f7c363bbd5d202b8103826">
+        </meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="umeng" >
+        </meta-data>
     </application>
 
 </manifest>
