@@ -1,5 +1,8 @@
 package cn.zhiao.develop.freeofo;
 
+import android.content.Context;
+import android.support.multidex.MultiDex;
+
 import com.avos.avoscloud.AVOSCloud;
 import com.pgyersdk.crash.PgyCrashManager;
 import com.umeng.message.IUmengRegisterCallback;
@@ -22,6 +25,13 @@ import cn.zhiao.baselib.app.BaseApplication;
  */
 
 public class App extends BaseApplication{
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();

@@ -5,8 +5,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,15 +18,23 @@ import com.qq.e.ads.banner.BannerView;
 import com.qq.e.ads.interstitial.AbstractInterstitialADListener;
 import com.qq.e.ads.interstitial.InterstitialAD;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.Bind;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.BmobUpdateListener;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.update.BmobUpdateAgent;
 import cn.bmob.v3.update.UpdateResponse;
+import cn.leancloud.chatkit.LCChatKitUser;
 import cn.zhiao.baselib.app.BaseApplication;
 import cn.zhiao.baselib.base.BaseActivity;
 import cn.zhiao.baselib.utils.SharedPrefrecesUtils;
 import cn.zhiao.develop.freeofo.bean.Constants;
 import cn.zhiao.develop.freeofo.bean.User;
+import cn.zhiao.develop.freeofo.ui.CommonActivity;
 import cn.zhiao.develop.freeofo.ui.HomeFragment;
 import cn.zhiao.develop.freeofo.ui.MinePwdActivity;
 import cn.zhiao.develop.freeofo.ui.PayChoocesActivity;
@@ -49,11 +58,10 @@ public class MainActivity extends BaseActivity {
     TextView versionNotify;
     @Bind(R.id.dl_left)
     DrawerLayout dlLeft;
-    @Bind(R.id.containers)
-    FrameLayout containers;
     private ActionBarDrawerToggle mDrawerToggle;
-    private User user;
+    private User userL;
     private FeedbackAgent agent;
+    public static List<LCChatKitUser> partUsers = new ArrayList<LCChatKitUser>();
 
     @Override
     public void initView() {
@@ -63,14 +71,15 @@ public class MainActivity extends BaseActivity {
             public void onUpdateReturned(int updateStatus, UpdateResponse updateInfo) {
                 // TODO Auto-generated method stub
                 //根据updateStatus来判断更新是否成功
-                logE(updateStatus+updateInfo.toString());
-                if(updateStatus==0){
+                logE(updateStatus + updateInfo.toString());
+                if (updateStatus == 0) {
                     versionNotify.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     versionNotify.setVisibility(View.GONE);
                 }
             }
         });
+
         agent = new FeedbackAgent(getContext());
         agent.sync();
         //setToolbar(toolbar);
@@ -94,8 +103,8 @@ public class MainActivity extends BaseActivity {
         mDrawerToggle.syncState();
         dlLeft.setDrawerListener(mDrawerToggle);
         tvVersion.setText("V" + BaseApplication.getVersion());
-        addFragment(R.id.containers,new HomeFragment());
-        userPhone.setText(user.getUsername());
+        addFragment(R.id.containers, new HomeFragment());
+        userPhone.setText(userL.getUsername());
         initBanner();
         initInterstitialAD();
 
@@ -109,26 +118,26 @@ public class MainActivity extends BaseActivity {
 
     private void initInterstitialAD() {
         /**
-        * 创建插屏广告
-        * "appid"指在 http://e.qq.com/dev/ 能看到的app唯一字符串
-        * "广告位 id" 指在 http://e.qq.com/dev/ 生成的数字串，
-        * 并非 appid 或者 appkey
-        */
+         * 创建插屏广告
+         * "appid"指在 http://e.qq.com/dev/ 能看到的app唯一字符串
+         * "广告位 id" 指在 http://e.qq.com/dev/ 生成的数字串，
+         * 并非 appid 或者 appkey
+         */
         final InterstitialAD iad = new InterstitialAD(this, Constants.APPID, Constants.InterteristalPosID);
-            iad.setADListener(new AbstractInterstitialADListener() {
+        iad.setADListener(new AbstractInterstitialADListener() {
 
-                @Override
-                public void onADReceive() {
-                     /*
-                    * 展示插屏广告，仅在回调接口的adreceive事件发生后调用才有效。
-                    */
-                    iad.show();
-                }
+            @Override
+            public void onADReceive() {
+                 /*
+                * 展示插屏广告，仅在回调接口的adreceive事件发生后调用才有效。
+                */
+                iad.show();
+            }
 
-                @Override
-                public void onNoAD(int arg0) {
-                    Log.i("AD_DEMO", "LoadInterstitialAd Fail:" + arg0);
-                }
+            @Override
+            public void onNoAD(int arg0) {
+                Log.i("AD_DEMO", "LoadInterstitialAd Fail:" + arg0);
+            }
 
         });
         //请求插屏广告，每次重新请求都可以调用此方法。
@@ -161,7 +170,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initPresenter() {
-        user = (User) SharedPrefrecesUtils.readObject(getContext(),"user");
+        userL = (User) SharedPrefrecesUtils.readObject(getContext(), "user");
+        initLockerList();
 //        final rx.plugins.RxJavaErrorHandler rxJavaErrorHandler = new rx.plugins.RxJavaErrorHandler() {
 //            @Override
 //            public void handleError( final Throwable x ) {
@@ -211,9 +221,11 @@ public class MainActivity extends BaseActivity {
 //        PgyFeedback.getInstance().showActivity(getContext());
         agent.startDefaultThreadActivity();
     }
+
     public void gotoWork(View view) {
         agent.startDefaultThreadActivity();
     }
+
     public void gotoUpate(View view) {
         update();
     }
@@ -249,4 +261,39 @@ public class MainActivity extends BaseActivity {
         BmobUpdateAgent.forceUpdate(getContext());
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.share_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_share:
+                gt(CommonActivity.class);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void initLockerList() {
+        BmobQuery<User> query = new BmobQuery<User>();
+        query.addWhereEqualTo("isLocker", true);
+        query.findObjects(new FindListener<User>() {
+            @Override
+            public void done(List<User> object, BmobException e) {
+                if(e==null){
+                    //showToast("查询用户成功:"+object.size());
+                    partUsers.clear();
+                    for (User user:object) {
+                        if(!user.getUsername().equals(userL.getUsername()))
+                            partUsers.add(new LCChatKitUser(user.getLockerId(), user.getLockerName(), user.getPhotoUrl()));
+                    }
+                }else{
+                    showToast("更新用户信息失败:" + e.getMessage());
+                }
+            }
+        });
+    }
 }

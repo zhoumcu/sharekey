@@ -20,7 +20,7 @@ public class LoginPresenterImpl implements LoginPresenter {
     public void login(EditText eduser, EditText edpassword, final LoginView loginView) {
         //实例化产品模型
         final LoginModel loginModel = new LoginModelImpl();
-        //loginView.showProgress();
+        loginView.showProgress("正在登录中......");
         String username = loginModel.verfiyUserName(eduser);
         String password = loginModel.verfiyPassWord(edpassword);
         if(username==null&&password==null) return;
@@ -28,6 +28,7 @@ public class LoginPresenterImpl implements LoginPresenter {
         loginModel.login(username, password, new CommonCallback<User>() {
             @Override
             public void onSucess(User data) {
+                loginView.hideProgress();
                 loginView.loginResult(data);
                 //loginView.hideProgress();
             }

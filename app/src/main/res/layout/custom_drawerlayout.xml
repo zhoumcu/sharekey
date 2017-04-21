@@ -6,9 +6,11 @@
     <!--主布局-->
     <FrameLayout
         android:id="@+id/containers"
+        android:layout_above="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </FrameLayout>
+
     <!--侧滑菜单-->
     <LinearLayout
         android:layout_width="match_parent"

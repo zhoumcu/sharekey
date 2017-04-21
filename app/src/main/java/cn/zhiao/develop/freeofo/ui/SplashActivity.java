@@ -2,21 +2,28 @@ package cn.zhiao.develop.freeofo.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.avos.avoscloud.im.v2.AVIMClient;
+import com.avos.avoscloud.im.v2.AVIMException;
+import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
 
+import cn.leancloud.chatkit.LCChatKit;
+import cn.zhiao.baselib.base.BaseActivity;
 import cn.zhiao.baselib.utils.SharedPrefrecesUtils;
 import cn.zhiao.develop.freeofo.MainActivity;
 import cn.zhiao.develop.freeofo.R;
 import cn.zhiao.develop.freeofo.bean.Constants;
+import cn.zhiao.develop.freeofo.bean.User;
 
 /**
  * author：Administrator on 2017/4/12 17:34
@@ -24,7 +31,7 @@ import cn.zhiao.develop.freeofo.bean.Constants;
  * email：1032324589@qq.com
  */
 
-public class SplashActivity extends Activity implements SplashADListener {
+public class SplashActivity extends BaseActivity implements SplashADListener {
     private static final String SKIP_TEXT = "跳过";
     private SplashAD splashAD;
     private ViewGroup container;
@@ -32,12 +39,20 @@ public class SplashActivity extends Activity implements SplashADListener {
     private ImageView splashHolder;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+    public void initView() {
         container = (ViewGroup) this.findViewById(R.id.splash_container);
         skipView = (TextView) findViewById(R.id.skip_view);
         fetchSplashAD(this, container, skipView, Constants.APPID, Constants.SplashPosID, this, 0);
+    }
+
+    @Override
+    public void initPresenter() {
+
+    }
+
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.activity_splash;
     }
 
     /**
@@ -64,12 +79,13 @@ public class SplashActivity extends Activity implements SplashADListener {
 
     private void next() {
         if(SharedPrefrecesUtils.getBooleanFromSharedPrefrences("is_login",this)){
-            this.startActivity(new Intent(this, MainActivity.class));
+            //this.startActivity(new Intent(this, MainActivity.class));
+            loginleanCloud();
         }else{
             this.startActivity(new Intent(this, LoginAcitvity.class));
+            //防止用户回退看到此页面
+            this.finish();
         }
-        //防止用户回退看到此页面
-        this.finish();
     }
 
     @Override
@@ -109,5 +125,33 @@ public class SplashActivity extends Activity implements SplashADListener {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public void loginleanCloud() {
+        final User user = (User) SharedPrefrecesUtils.readObject(this, "user");
+        String clientId;
+        if(user.isLocker()){
+            clientId = user.getLockerId();
+        }else{
+            clientId = user.getUsername();
+        }
+        if (TextUtils.isEmpty(clientId.trim())) {
+            Toast.makeText(this, "不能为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        LCChatKit.getInstance().open(clientId, new AVIMClientCallback() {
+            @Override
+            public void done(AVIMClient avimClient, AVIMException e) {
+                if (null == e) {
+                    //showToast("登录成功:");
+                    gt(MainActivity.class);
+                    finish();
+                    //SharedPrefrecesUtils.saveObject(getContext(),"user", user);
+                    //SharedPrefrecesUtils.saveBooleanToSharedPrefrences("is_login",true,getContext());
+                } else {
+                    showToast(e.toString());
+                }
+            }
+        });
     }
 }

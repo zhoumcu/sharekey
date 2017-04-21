@@ -30,7 +30,8 @@
         android:supportsRtl="true"
         android:name=".App"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.SplashActivity">
+        <activity android:name=".ui.SplashActivity"
+            android:theme="@style/AppNoTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,6 +50,8 @@
             android:label="支付"/>
         <activity android:name=".ui.PayForMeActivity"
             android:label="打赏作者"/>
+        <activity android:name=".ui.CommonActivity"
+            android:label="办证解锁大厅"/>
         <!-- 可选-->
         <activity android:name="com.pgyersdk.activity.FeedbackActivity"/>
         <!-- 必选-->
@@ -141,6 +144,19 @@
             android:name="UMENG_CHANNEL"
             android:value="umeng" >
         </meta-data>
+
+        <!-- 实时通信模块、推送（均需要加入以下声明） START -->
+        <!-- 实时通信模块、推送都要使用 PushService -->
+        <service android:name="com.avos.avoscloud.PushService"/>
+        <receiver android:name="com.avos.avoscloud.AVBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.USER_PRESENT"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <!-- 实时通信模块、推送 END -->
+
     </application>
 
 </manifest>

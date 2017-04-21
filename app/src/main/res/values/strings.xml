@@ -31,6 +31,7 @@
     <string name="tip">（找办证员确认之后\n   再支付，谨防骗子）</string>
     <string name="pay">打赏</string>
     <string name="payforme">一毛也是爱，您的支持是我们前行的动力！</string>
+    <string name="square">广场</string>
     <string-array name="amount">
         　　        <item>0.1元</item>
         　　        <item>0.3元</item>
