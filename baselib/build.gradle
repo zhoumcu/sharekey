@@ -42,6 +42,8 @@ dependencies {
     compile('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
         exclude module: 'support-v4'
     }
+    //AdvancedPagerSlidingTabStrip
+    compile 'homhomlin.lib:apsts:1.4.0'
     //实用的多条件筛选菜单(非常实用，拓展性强)
     compile 'com.github.dongjunkun:DropDownMenu:1.0.3'
     //地址 设置选择器
@@ -50,6 +52,8 @@ dependencies {
     compile 'com.foamtrace:photopicker:1.0'
     //bmob后端云SDK
     compile 'cn.bmob.android:bmob-sdk:3.5.0'
+    //拼音
+    compile 'com.github.stuxuhai:jpinyin:1.0'
     //与bmob冲突
     //compile 'com.squareup.okhttp:okhttp:2.5.0'
     //compile 'com.google.code.gson:gson:2.3.1'

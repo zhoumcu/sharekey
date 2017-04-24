@@ -17,12 +17,14 @@ import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import cn.leancloud.chatkit.LCChatKit;
 import cn.zhiao.baselib.base.BaseActivity;
 import cn.zhiao.baselib.utils.SharedPrefrecesUtils;
 import cn.zhiao.develop.freeofo.MainActivity;
 import cn.zhiao.develop.freeofo.R;
-import cn.zhiao.develop.freeofo.bean.Constants;
 import cn.zhiao.develop.freeofo.bean.User;
 
 /**
@@ -42,7 +44,13 @@ public class SplashActivity extends BaseActivity implements SplashADListener {
     public void initView() {
         container = (ViewGroup) this.findViewById(R.id.splash_container);
         skipView = (TextView) findViewById(R.id.skip_view);
-        fetchSplashAD(this, container, skipView, Constants.APPID, Constants.SplashPosID, this, 0);
+        //fetchSplashAD(this, container, skipView, Constants.APPID, Constants.SplashPosID, this, 0);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                next();
+            }
+        },2000);
     }
 
     @Override

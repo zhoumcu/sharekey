@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.message.PushAgent;
 
 import java.util.Locale;
 
@@ -57,6 +58,7 @@ public  abstract class BaseActivity extends AppCompatActivity implements IBaseVi
         ButterKnife.bind(this);
         initPresenter();
         initView();
+        PushAgent.getInstance(this).onAppStart();
     }
 
     public void onResume() {

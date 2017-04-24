@@ -1,47 +1,39 @@
 package cn.zhiao.develop.freeofo.ui.chatkit;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.leancloud.chatkit.LCChatKitUser;
+import cn.leancloud.chatkit.LCChatProfileProvider;
 import cn.leancloud.chatkit.LCChatProfilesCallBack;
-import cn.zhiao.develop.freeofo.bean.User;
 
 /**
- * author：Administrator on 2017/4/21 10:04
- * company: xxxx
- * email：1032324589@qq.com
+ * Created by wli on 15/12/4.
+ * 实现自定义用户体系
  */
 public class CustomUserProvider implements LCChatProfileProvider {
 
     private static CustomUserProvider customUserProvider;
-    private User user;
 
-    public synchronized static CustomUserProvider getInstance(Context context) {
+    public synchronized static CustomUserProvider getInstance() {
         if (null == customUserProvider) {
-            customUserProvider = new CustomUserProvider(context);
+            customUserProvider = new CustomUserProvider();
         }
         return customUserProvider;
     }
 
-    private CustomUserProvider(Context context) {
-//        user = (User) SharedPrefrecesUtils.readObject(context, "user");
-//        if(user.isLocker()){
-//            partUsers.add(new LCChatKitUser(user.getLockerId(), user.getLockerName(), user.getPhotoUrl()));
-//        }
+    private CustomUserProvider() {
     }
 
     private static List<LCChatKitUser> partUsers = new ArrayList<LCChatKitUser>();
 
-    // 此数据均为模拟数据，仅供参考
+    // 此数据均为 fake，仅供参考
 //    static {
-//        partUsers.add(new LCChatKitUser("Tom", "开锁王1", "http://www.avatarsdb.com/avatars/tom_and_jerry2.jpg"));
-//        partUsers.add(new LCChatKitUser("Jerry", "开锁王2", "http://www.avatarsdb.com/avatars/jerry.jpg"));
-//        partUsers.add(new LCChatKitUser("Harry", "开锁王3", "http://www.avatarsdb.com/avatars/young_harry.jpg"));
-//        partUsers.add(new LCChatKitUser("William", "开锁王4", "http://www.avatarsdb.com/avatars/william_shakespeare.jpg"));
-//        partUsers.add(new LCChatKitUser("Bob", "开锁王5", "http://www.avatarsdb.com/avatars/bath_bob.jpg"));
+//        partUsers.add(new LCChatKitUser("Tom", "Tom", "http://www.avatarsdb.com/avatars/tom_and_jerry2.jpg"));
+//        partUsers.add(new LCChatKitUser("Jerry", "Jerry", "http://www.avatarsdb.com/avatars/jerry.jpg"));
+//        partUsers.add(new LCChatKitUser("Harry", "Harry", "http://www.avatarsdb.com/avatars/young_harry.jpg"));
+//        partUsers.add(new LCChatKitUser("William", "William", "http://www.avatarsdb.com/avatars/william_shakespeare.jpg"));
+//        partUsers.add(new LCChatKitUser("Bob", "Bob", "http://www.avatarsdb.com/avatars/bath_bob.jpg"));
 //    }
 
     @Override
@@ -58,6 +50,9 @@ public class CustomUserProvider implements LCChatProfileProvider {
         callBack.done(userList, null);
     }
 
+    public void setAllUsers(List<LCChatKitUser> partUsers) {
+        this.partUsers = partUsers;
+    }
     public List<LCChatKitUser> getAllUsers() {
         return partUsers;
     }

@@ -29,6 +29,7 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.update.BmobUpdateAgent;
 import cn.bmob.v3.update.UpdateResponse;
 import cn.leancloud.chatkit.LCChatKitUser;
+import cn.leancloud.chatkit.event.LCIMIMTypeMessageEvent;
 import cn.zhiao.baselib.app.BaseApplication;
 import cn.zhiao.baselib.base.BaseActivity;
 import cn.zhiao.baselib.utils.SharedPrefrecesUtils;
@@ -38,6 +39,8 @@ import cn.zhiao.develop.freeofo.ui.CommonActivity;
 import cn.zhiao.develop.freeofo.ui.HomeFragment;
 import cn.zhiao.develop.freeofo.ui.MinePwdActivity;
 import cn.zhiao.develop.freeofo.ui.PayChoocesActivity;
+import cn.zhiao.develop.freeofo.ui.chatkit.CustomUserProvider;
+import de.greenrobot.event.EventBus;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends BaseActivity {
@@ -62,9 +65,11 @@ public class MainActivity extends BaseActivity {
     private User userL;
     private FeedbackAgent agent;
     public static List<LCChatKitUser> partUsers = new ArrayList<LCChatKitUser>();
+    private boolean isRecvMsg = false;
 
     @Override
     public void initView() {
+        EventBus.getDefault().register(this);
         BmobUpdateAgent.update(this);
         BmobUpdateAgent.setUpdateListener(new BmobUpdateListener() {
             @Override
@@ -105,8 +110,8 @@ public class MainActivity extends BaseActivity {
         tvVersion.setText("V" + BaseApplication.getVersion());
         addFragment(R.id.containers, new HomeFragment());
         userPhone.setText(userL.getUsername());
-        initBanner();
-        initInterstitialAD();
+        //initBanner();
+        //initInterstitialAD();
 
 //        new Thread(new Runnable() {
 //            @Override
@@ -271,10 +276,25 @@ public class MainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_share:
+                isRecvMsg = false;
                 gt(CommonActivity.class);
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        System.out.println("执行了onPrepareOptionsMenu");
+        if (isRecvMsg) {
+            menu.findItem(R.id.menu_share).setIcon(
+                    R.mipmap.chat);
+        } else {
+            menu.findItem(R.id.menu_share).setIcon(
+                    R.mipmap.chated);
+        }
+        // getSupportMenuInflater().inflate(R.menu.book_detail, menu);
+        return super.onPrepareOptionsMenu(menu);
     }
 
     private void initLockerList() {
@@ -290,10 +310,28 @@ public class MainActivity extends BaseActivity {
                         if(!user.getUsername().equals(userL.getUsername()))
                             partUsers.add(new LCChatKitUser(user.getLockerId(), user.getLockerName(), user.getPhotoUrl()));
                     }
+                    CustomUserProvider.getInstance().setAllUsers(partUsers);
                 }else{
                     showToast("更新用户信息失败:" + e.getMessage());
                 }
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    /**
+     * 处理推送过来的消息
+     * 同理，避免无效消息，此处加了 conversation id 判断
+     */
+    public void onEvent(LCIMIMTypeMessageEvent messageEvent) {
+        if ( null != messageEvent){
+            isRecvMsg = true;
+            invalidateOptionsMenu();
+        }
     }
 }

@@ -3,6 +3,8 @@
 buildscript {
     repositories {
         jcenter()
+        // 这里是 LeanCloud 的包仓库
+        maven { url "http://mvn.leancloud.cn/nexus/content/repositories/public" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.2'
@@ -20,6 +22,8 @@ allprojects {
         //Bmob的maven仓库地址--必填
         maven { url "https://raw.github.com/bmob/bmob-android-sdk/master" }
         maven { url "https://raw.githubusercontent.com/Pgyer/mvn_repo_pgyer/master" }
+        // 这里是 LeanCloud 的包仓库
+        maven { url "http://mvn.leancloud.cn/nexus/content/repositories/public" }
     }
 }
 

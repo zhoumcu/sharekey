@@ -4,19 +4,21 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.avos.avoscloud.AVOSCloud;
-import com.pgyersdk.crash.PgyCrashManager;
+import com.avos.avoscloud.im.v2.AVIMClient;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
 
 import org.greenrobot.eventbus.EventBus;
 
-import c.b.BP;
 import cn.bmob.push.BmobPush;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
 import cn.bmob.v3.BmobInstallation;
 import cn.bmob.v3.update.BmobUpdateAgent;
+import cn.leancloud.chatkit.LCChatKit;
 import cn.zhiao.baselib.app.BaseApplication;
+import cn.zhiao.baselib.utils.L;
+import cn.zhiao.develop.freeofo.ui.chatkit.CustomUserProvider;
 
 /**
  * author：Administrator on 2017/4/12 10:42
@@ -25,6 +27,8 @@ import cn.zhiao.baselib.app.BaseApplication;
  */
 
 public class App extends BaseApplication{
+    private final String APP_ID = "YN8irJOPJnWukhHem1BSl7qY-gzGzoHsz";
+    private final String APP_KEY = "9ToLV1p8ous2eOj9Paje8Umt";
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -36,13 +40,17 @@ public class App extends BaseApplication{
     public void onCreate() {
         super.onCreate();
         initBmob();
-        initUmengPush();
-        PgyCrashManager.register(this);
+//        initUmengPush();
+//        PgyCrashManager.register(this);
         EventBus.builder().throwSubscriberException(BuildConfig.DEBUG).installDefaultEventBus();
-        BP.init("25fbbe530d801ab95a2723acf03c50b6");
+//        BP.init("25fbbe530d801ab95a2723acf03c50b6");
         AVOSCloud.initialize(this,"YN8irJOPJnWukhHem1BSl7qY-gzGzoHsz","9ToLV1p8ous2eOj9Paje8Umt");
         // 放在 SDK 初始化语句 AVOSCloud.initialize() 后面，只需要调用一次即可
+        LCChatKit.getInstance().setProfileProvider(CustomUserProvider.getInstance());
         AVOSCloud.setDebugLogEnabled(true);
+        LCChatKit.getInstance().init(getApplicationContext(), APP_ID, APP_KEY);
+        AVIMClient.setOfflineMessagePush(true);
+        AVIMClient.setAutoOpen(false);
     }
     private void initUmengPush(){
         PushAgent mPushAgent = PushAgent.getInstance(this);
@@ -52,11 +60,13 @@ public class App extends BaseApplication{
             @Override
             public void onSuccess(String deviceToken) {
                 //注册成功会返回device token
+                L.e(deviceToken);
             }
 
             @Override
             public void onFailure(String s, String s1) {
-
+                //
+                L.e(s+s1);
             }
         });
 

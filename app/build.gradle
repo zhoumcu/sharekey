@@ -82,7 +82,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-//    compile fileTree(include: ['*.jar'], dir: 'src/main/libs')
+    //    compile fileTree(include: ['*.jar'], dir: 'src/main/libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -91,6 +91,8 @@ dependencies {
     compile project(':baselib')
     //推送
     compile 'com.pgyersdk:sdk:2.5.6'
-    compile 'com.android.support:multidex:1.0.0' //根据版本支持来配置,目前支持1.0.1
-    compile ('cn.leancloud.android:chatkit:1.0.0')
+    compile 'com.android.support:multidex:1.0.0'
+    //根据版本支持来配置,目前支持1.0.1
+    //compile ('cn.leancloud.android:chatkit:1.0.0')
+    compile project(':leancloudchatkit')
 }
