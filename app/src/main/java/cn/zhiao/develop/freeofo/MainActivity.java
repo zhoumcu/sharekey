@@ -324,6 +324,12 @@ public class MainActivity extends BaseActivity {
         EventBus.getDefault().unregister(this);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        invalidateOptionsMenu();
+    }
+
     /**
      * 处理推送过来的消息
      * 同理，避免无效消息，此处加了 conversation id 判断
