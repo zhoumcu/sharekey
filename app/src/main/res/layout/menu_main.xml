@@ -105,7 +105,6 @@
                 <TextView
                     style="@style/menu_text_style"
                     android:textSize="11sp"
-                    android:layout_gravity="top"
                     android:text="@string/contants" />
 
                 <View
@@ -215,7 +214,8 @@
 
             <View style="@style/menu_divider_style" />
 
-            <LinearLayout style="@style/menu_layout_style"
+            <LinearLayout
+                style="@style/menu_layout_style"
                 android:onClick="gotoSetting">
 
                 <ImageView

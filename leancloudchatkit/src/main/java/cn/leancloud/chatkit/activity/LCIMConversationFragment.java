@@ -27,6 +27,9 @@ import com.avos.avoscloud.im.v2.messages.AVIMAudioMessage;
 import com.avos.avoscloud.im.v2.messages.AVIMImageMessage;
 import com.avos.avoscloud.im.v2.messages.AVIMTextMessage;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -198,6 +201,7 @@ public class LCIMConversationFragment extends Fragment {
    * 输入事件处理，接收后构造成 AVIMTextMessage 然后发送
    * 因为不排除某些特殊情况会受到其他页面过来的无效消息，所以此处加了 tag 判断
    */
+
   public void onEvent(LCIMInputBottomBarTextEvent textEvent) {
     if (null != imConversation && null != textEvent) {
       if (!TextUtils.isEmpty(textEvent.sendContent) && imConversation.getConversationId().equals(textEvent.tag)) {
@@ -237,6 +241,7 @@ public class LCIMConversationFragment extends Fragment {
    *
    * @param event
    */
+  @Subscribe(threadMode = ThreadMode.MAIN)
   public void onEvent(LCIMInputBottomBarEvent event) {
     if (null != imConversation && null != event && imConversation.getConversationId().equals(event.tag)) {
       switch (event.eventAction) {

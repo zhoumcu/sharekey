@@ -262,7 +262,6 @@ public class MainActivity extends BaseActivity {
     public void gotoSetting(View view) {
         SharedPrefrecesUtils.saveObject(getContext(),"user", null);
         SharedPrefrecesUtils.saveBooleanToSharedPrefrences("is_login",false,getContext());
-        EMClient.getInstance().logout(true);
         finish();
         gt(LoginAcitvity.class);
     }

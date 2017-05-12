@@ -19,6 +19,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
@@ -58,6 +59,7 @@ public  abstract class BaseActivity extends AppCompatActivity implements IBaseVi
         ButterKnife.bind(this);
         initPresenter();
         initView();
+        closeKeyboard();
         PushAgent.getInstance(this).onAppStart();
     }
 
@@ -336,7 +338,16 @@ public  abstract class BaseActivity extends AppCompatActivity implements IBaseVi
             this.toolbar = toolbar;
         }
     }
-
+    /**
+     * 关闭软键盘
+     */
+    private void closeKeyboard() {
+        View view = getWindow().peekDecorView();
+        if (view != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
     public void switchLanguage(Locale locale, Class cl) {
         Configuration config = getResources().getConfiguration();// 获得设置对象
         Resources resources = getResources();// 获得res资源对象

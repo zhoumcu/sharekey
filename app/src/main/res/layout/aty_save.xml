@@ -27,27 +27,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
-            <cn.zhiao.baselib.utils.gridpassword.GridPasswordView
+            <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/numView"
+                android:gravity="center"
+                android:hint="输入车牌号码"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                app:gpvTextColor="#2196F3"
-                app:gpvTextSize="25sp"
-                app:gpvLineColor="#2196F3"
-                app:gpvPasswordLength="7"
-                app:gpvPasswordType="number"/>
+                android:layout_height="40dp"
+                android:inputType="number"/>
 
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_gravity="center_horizontal"
             android:text="@string/code_prompt"
             android:textColor="@color/black_dd"
@@ -56,16 +55,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <cn.zhiao.baselib.utils.gridpassword.GridPasswordView
                 android:id="@+id/pswView"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 app:gpvTextColor="#2196F3"
                 app:gpvTextSize="25sp"
                 app:gpvLineColor="#2196F3"
@@ -87,7 +86,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/bt_book_selector"
             android:text="@string/save"
             android:textColor="@color/white_dd"

@@ -58,6 +58,7 @@
         <activity android:name=".ui.RegisterActivity"
             android:label="注册"/>
         <activity android:name=".MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/AppNoTheme"/>
         <activity android:name=".ui.MinePwdActivity"
             android:label="我的密码"/>
