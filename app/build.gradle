@@ -79,40 +79,38 @@ android {
         javaMaxHeapSize "4g"
     }
     //use legacy for android 6.0
-    useLibrary 'org.apache.http.legacy'
+//    useLibrary 'org.apache.http.legacy'
     // 遇到java.util.zip.ZipException: duplicate entry: android/support/annotation/ColorRes.class
     // 遇到Java.util.zip.ZipException: duplicate entry: android/support/v4/internal/view/SupportSubMenu.class
-    configurations {
-        all*.exclude group: 'com.android.support', module: 'support-v4'
-        all*.exclude group: 'com.android.support', module: 'support-annotations'
-    }
+//    configurations {
+//        all*.exclude group: 'com.android.support', module: 'support-annotations'
+//        all*.exclude group: 'com.android.support', module: 'support-compat'
+//        all*.exclude group: 'com.android.support', module: 'support-v4'
+//        all*.exclude group: 'com.android.support', module: 'support-core-ui'
+//    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //    compile fileTree(include: ['*.jar'], dir: 'src/main/libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+//    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//    })
     //compile 'com.android.support:appcompat-v7:25.2.0'
     testCompile 'junit:junit:4.12'
     compile project(':baselib')
     //推送
     compile 'com.pgyersdk:sdk:2.5.6'
-    compile ('com.android.support:multidex:1.0.0'){
-        exclude module: 'support-v4'
-        exclude module: 'support-annotations'
-    }
+    compile 'com.android.support:multidex:1.0.0'
     //根据版本支持来配置,目前支持1.0.1
     //compile ('cn.leancloud.android:chatkit:1.0.0')
     //compile project(':leancloudchatkit')
 
     //Optional compile for GCM (Google Cloud Messaging).
-    compile ('com.google.android.gms:play-services-gcm:9.4.0'){
-        exclude module: 'support-v4'
-    }
-    compile ('com.hyphenate:hyphenate-sdk:3.3.0'){
-        exclude module: 'support-v4'
-    }
-    compile project(path: ':easeui')
+//    compile ('com.google.android.gms:play-services-gcm:9.4.0'){
+//        exclude module: 'support-v4'
+//    }
+//    compile ('com.hyphenate:hyphenate-sdk:3.3.0'){
+//        exclude module: 'support-v4'
+//    }
 }
