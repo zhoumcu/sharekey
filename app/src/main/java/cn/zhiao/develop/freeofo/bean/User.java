@@ -8,6 +8,7 @@ import cn.bmob.v3.BmobUser;
  * email：1032324589@qq.com
  */
 public class User extends BmobUser {
+
     public boolean isLocker() {
         return isLocker;
     }
@@ -33,8 +34,8 @@ public class User extends BmobUser {
     }
 
     private boolean isLocker = false;
-    private String lockerName = "开锁王";
-    private String lockerId = "开锁王";
+    private String lockerName = "普通";
+    private String lockerId = "普通";
 
     public String getPhotoUrl() {
         return photoUrl;
@@ -44,5 +45,5 @@ public class User extends BmobUser {
         this.photoUrl = photoUrl;
     }
 
-    private String photoUrl = "http://www.avatarsdb.com/avatars/tom_and_jerry2.jpg";
+    private String photoUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1493207862074&di=ffca420e19ef344cbdb560ae86fd21d8&imgtype=0&src=http%3A%2F%2Fwww.lgstatic.com%2Fthumbnail_300x300%2Fimage1%2FM00%2F0C%2F93%2FCgo8PFT1mgGAch5LAABMj6Js2g8029.jpg";
 }

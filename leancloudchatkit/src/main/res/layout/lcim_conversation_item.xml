@@ -44,7 +44,7 @@
 
             <TextView
                 android:id="@+id/conversation_item_tv_name"
-                style="@android:style/TextAppearance.Large"
+                style="@android:style/TextAppearance.DialogWindowTitle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

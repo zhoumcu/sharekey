@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import cn.leancloud.chatkit.view.LCIMDividerItemDecoration;
 import cn.zhiao.develop.freeofo.MainActivity;
 import cn.zhiao.develop.freeofo.R;
@@ -72,6 +75,7 @@ public class ContactFragment extends Fragment {
    * 处理 LetterView 发送过来的 MemberLetterEvent
    * 会通过 MembersAdapter 获取应该要跳转到的位置，然后跳转
    */
+  @Subscribe(threadMode = ThreadMode.MAIN)
   public void onEvent(MemberLetterEvent event) {
     Character targetChar = Character.toLowerCase(event.letter);
     if (itemAdapter.getIndexMap().containsKey(targetChar)) {

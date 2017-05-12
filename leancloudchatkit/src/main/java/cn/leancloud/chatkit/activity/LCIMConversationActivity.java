@@ -30,6 +30,7 @@ import cn.leancloud.chatkit.utils.LCIMLogUtils;
 public class LCIMConversationActivity extends AppCompatActivity {
 
   protected LCIMConversationFragment conversationFragment;
+  private ActionBar actionBar;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,10 @@ public class LCIMConversationActivity extends AppCompatActivity {
     setContentView(R.layout.lcim_conversation_activity);
     conversationFragment = (LCIMConversationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_chat);
     initByIntent(getIntent());
+    actionBar = getSupportActionBar();
+    actionBar.setDisplayUseLogoEnabled(false);
+    actionBar.setDisplayHomeAsUpEnabled(true);
+    actionBar.setTitle("");
   }
 
   @Override
@@ -72,13 +77,10 @@ public class LCIMConversationActivity extends AppCompatActivity {
    * @param title
    */
   protected void initActionBar(String title) {
-    ActionBar actionBar = getSupportActionBar();
     if (null != actionBar) {
       if (null != title) {
         actionBar.setTitle(title);
       }
-      actionBar.setDisplayUseLogoEnabled(false);
-      actionBar.setDisplayHomeAsUpEnabled(true);
       finishActivity(RESULT_OK);
     }
   }

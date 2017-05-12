@@ -18,6 +18,9 @@ import com.qq.e.ads.banner.BannerView;
 import com.qq.e.ads.interstitial.AbstractInterstitialADListener;
 import com.qq.e.ads.interstitial.InterstitialAD;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +40,7 @@ import cn.zhiao.develop.freeofo.bean.Constants;
 import cn.zhiao.develop.freeofo.bean.User;
 import cn.zhiao.develop.freeofo.ui.CommonActivity;
 import cn.zhiao.develop.freeofo.ui.HomeFragment;
+import cn.zhiao.develop.freeofo.ui.LoginAcitvity;
 import cn.zhiao.develop.freeofo.ui.MinePwdActivity;
 import cn.zhiao.develop.freeofo.ui.PayChoocesActivity;
 import cn.zhiao.develop.freeofo.ui.chatkit.CustomUserProvider;
@@ -65,6 +69,7 @@ public class MainActivity extends BaseActivity {
     private User userL;
     private FeedbackAgent agent;
     public static List<LCChatKitUser> partUsers = new ArrayList<LCChatKitUser>();
+    public static List<LCChatKitUser> partAllUsers = new ArrayList<LCChatKitUser>();
     private boolean isRecvMsg = false;
 
     @Override
@@ -236,7 +241,10 @@ public class MainActivity extends BaseActivity {
     }
 
     public void gotoSetting(View view) {
-
+        SharedPrefrecesUtils.saveObject(getContext(),"user", null);
+        SharedPrefrecesUtils.saveBooleanToSharedPrefrences("is_login",false,getContext());
+        finish();
+        gt(LoginAcitvity.class);
     }
 
     private void update() {
@@ -306,8 +314,10 @@ public class MainActivity extends BaseActivity {
                 if(e==null){
                     //showToast("查询用户成功:"+object.size());
                     partUsers.clear();
+//                    partAllUsers.clear();
                     for (User user:object) {
-                        if(!user.getUsername().equals(userL.getUsername()))
+//                        partAllUsers.add(new LCChatKitUser(user.getLockerId(), user.getLockerName(), user.getPhotoUrl()));
+                        if(!user.getUsername().equals(userL.getUsername())&&user.isLocker())
                             partUsers.add(new LCChatKitUser(user.getLockerId(), user.getLockerName(), user.getPhotoUrl()));
                     }
                     CustomUserProvider.getInstance().setAllUsers(partUsers);
@@ -334,6 +344,7 @@ public class MainActivity extends BaseActivity {
      * 处理推送过来的消息
      * 同理，避免无效消息，此处加了 conversation id 判断
      */
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(LCIMIMTypeMessageEvent messageEvent) {
         if ( null != messageEvent){
             isRecvMsg = true;

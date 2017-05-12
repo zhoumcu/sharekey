@@ -30,7 +30,7 @@ public class Keys extends BmobObject{
         this.rightNum = rightNum;
     }
 
-    private int wrongNum = 1;
+    private int wrongNum = 0;
 
     public String getKeyName() {
         return keyName;

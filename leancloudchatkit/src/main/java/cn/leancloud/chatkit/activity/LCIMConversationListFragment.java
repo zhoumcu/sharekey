@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 
 import com.avos.avoscloud.im.v2.AVIMConversation;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +79,7 @@ public class LCIMConversationListFragment extends Fragment {
    *
    * @param event
    */
+  @Subscribe(threadMode = ThreadMode.MAIN)
   public void onEvent(LCIMIMTypeMessageEvent event) {
     updateConversationList();
   }

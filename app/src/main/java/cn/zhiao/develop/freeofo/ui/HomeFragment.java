@@ -5,6 +5,7 @@ import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +23,6 @@ import butterknife.OnClick;
 import cn.zhiao.baselib.base.BaseFragment;
 import cn.zhiao.baselib.utils.CommonUtil;
 import cn.zhiao.baselib.utils.SharedPrefrecesUtils;
-import cn.zhiao.baselib.utils.gridpassword.GridPasswordView;
 import cn.zhiao.develop.freeofo.R;
 import cn.zhiao.develop.freeofo.bean.Constants;
 import cn.zhiao.develop.freeofo.bean.Keys;
@@ -46,7 +46,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
     @Bind(R.id.btn_light)
     ImageView btnLight;
     @Bind(R.id.numView)
-    GridPasswordView numView;
+    AppCompatEditText numView;
     private HomePresenterImpl presenter;
     private boolean isFlashOpen;
     private Camera m_Camera;
@@ -68,8 +68,8 @@ public class HomeFragment extends BaseFragment implements HomeView {
     @Override
     public void initView() {
         url = CommonUtil.getCompleteUrl(getResources().getString(R.string.notify));
-        notify.setText(SharedPrefrecesUtils.getStrFromSharedPrefrences(Constants.MSG,getContext())==""?
-                getResources().getString(R.string.notify):SharedPrefrecesUtils.getStrFromSharedPrefrences(Constants.MSG,getContext()));
+        notify.setText(SharedPrefrecesUtils.getStrFromSharedPrefrences(Constants.MSG, getContext()) == "" ?
+                getResources().getString(R.string.notify) : SharedPrefrecesUtils.getStrFromSharedPrefrences(Constants.MSG, getContext()));
     }
 
     @Override
@@ -82,56 +82,63 @@ public class HomeFragment extends BaseFragment implements HomeView {
     public void onMessageEvent(MessageEvent event) {
         /* Do something */
         notify.setText(event.getAlart());
-        url =  CommonUtil.getCompleteUrl(event.getAlart());
-        logE("客户端收到推送内容"+event.getAlart());
-    };
+        url = CommonUtil.getCompleteUrl(event.getAlart());
+        logE("客户端收到推送内容" + event.getAlart());
+    }
+
+    ;
 
     @Override
     protected void initPresenter() {
         presenter = new HomePresenterImpl(getContext(), this);
     }
 
-    @OnClick({R.id.btn_unlock, R.id.btn_save, R.id.btn_light,R.id.notify})
+    @OnClick({R.id.btn_lockers,R.id.btn_unlock, R.id.btn_save, R.id.btn_light, R.id.notify})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_unlock:
-                if(TextUtils.isEmpty(numView.getPassWord().toString())){
+                if (TextUtils.isEmpty(numView.getText().toString())) {
                     showToast("内容不能为空！");
                     return;
                 }
-                presenter.QueryData(numView.getPassWord().toString());
+                presenter.QueryData(numView.getText().toString());
                 break;
             case R.id.btn_save:
                 SavePwdFragment.jumpIn((AppCompatActivity) getActivity());
                 break;
             case R.id.btn_light:
                 if (!isFlashOpen) {
-                    try{
+                    try {
                         m_Camera = Camera.open();
                         Camera.Parameters mParameters;
                         mParameters = m_Camera.getParameters();
                         mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
                         m_Camera.setParameters(mParameters);
-                    } catch(Exception ex){}
+                    } catch (Exception ex) {
+                    }
                     isFlashOpen = true;
                 } else {
-                    try{
+                    try {
                         Camera.Parameters mParameters;
                         mParameters = m_Camera.getParameters();
                         mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
                         m_Camera.setParameters(mParameters);
                         m_Camera.release();
-                    } catch(Exception ex){}
+                    } catch (Exception ex) {
+                    }
                     isFlashOpen = false;
                 }
                 break;
             case R.id.notify:
-                showToast("click");
-                if(!TextUtils.isEmpty(url)){
+//                showToast("click");
+                if (!TextUtils.isEmpty(url)||url!=null) {
                     Uri uri = Uri.parse(url);
                     Intent it = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(it);
                 }
+                break;
+            case R.id.btn_lockers:
+                gt(CommonActivity.class);
                 break;
         }
     }
@@ -140,5 +147,4 @@ public class HomeFragment extends BaseFragment implements HomeView {
     public void getData(List<Keys> object) {
         ResultDialogFragment.showDialog((AppCompatActivity) getActivity(), object);
     }
-
 }

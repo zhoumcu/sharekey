@@ -4,6 +4,7 @@ import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,7 @@ import cn.zhiao.develop.freeofo.bean.User;
 public class SavePwdFragment extends BaseFragment {
     public static final String MY_TAG = "SavePwdFragment";
     @Bind(R.id.numView)
-    GridPasswordView numView;
+    AppCompatEditText numView;
     @Bind(R.id.pswView)
     GridPasswordView pswView;
     private boolean isFlashOpen;
@@ -72,7 +73,7 @@ public class SavePwdFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_save:
-                if(TextUtils.isEmpty(numView.getPassWord().toString())||numView.getPassWord().toString().length()<7){
+                if(TextUtils.isEmpty(numView.getText().toString())){
                     showToast("车牌号码不能为空或者输入不对！");
                     return;
                 }
@@ -85,13 +86,15 @@ public class SavePwdFragment extends BaseFragment {
                 //注意：不能调用gameScore.setObjectId("")方法
                 keys.setUserId(user.getObjectId());
                 keys.setKeyName(pswView.getPassWord().toString());
-                keys.setKeyNumber(numView.getPassWord().toString());
+                keys.setKeyNumber(numView.getText().toString());
                 keys.save(new SaveListener<String>() {
 
                     @Override
                     public void done(String objectId, BmobException e) {
                         if (e == null) {
                             hideProgress();
+                            numView.setText(null);
+                            pswView.clearPassword();
                             showToast("保存密码成功！可以通过<菜单->我的密码>中查询");
                         } else {
                             hideProgress();

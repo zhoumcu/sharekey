@@ -107,9 +107,12 @@ public class CommonUtil {
     public static String getCompleteUrl(String text) {
         Pattern p = Pattern.compile("((http|ftp|https)://)(([a-zA-Z0-9\\._-]+\\.[a-zA-Z]{2,6})|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,4})*(/[a-zA-Z0-9\\&%_\\./-~-]*)?", Pattern.CASE_INSENSITIVE);
         Matcher matcher = p.matcher(text);
-        matcher.find();
-        System.out.println(matcher.group());
-        return matcher.group();
+        if(matcher.find()){
+            System.out.println(matcher.group());
+            return matcher.group();
+        }else{
+            return null;
+        }
     }
 
     /**
