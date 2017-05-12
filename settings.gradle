@@ -1,1 +1,1 @@
-include ':app', ':baselib', ':leancloudchatkit'
+include ':app', ':baselib', ':easeui'

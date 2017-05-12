@@ -12,24 +12,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.avos.avoscloud.feedback.FeedbackAgent;
+import com.hyphenate.EMConnectionListener;
+import com.hyphenate.EMError;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.util.NetUtils;
 import com.qq.e.ads.banner.ADSize;
 import com.qq.e.ads.banner.AbstractBannerADListener;
 import com.qq.e.ads.banner.BannerView;
 import com.qq.e.ads.interstitial.AbstractInterstitialADListener;
 import com.qq.e.ads.interstitial.InterstitialAD;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.Bind;
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.BmobUpdateListener;
-import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.update.BmobUpdateAgent;
 import cn.bmob.v3.update.UpdateResponse;
-import cn.leancloud.chatkit.LCChatKitUser;
-import cn.leancloud.chatkit.event.LCIMIMTypeMessageEvent;
 import cn.zhiao.baselib.app.BaseApplication;
 import cn.zhiao.baselib.base.BaseActivity;
 import cn.zhiao.baselib.utils.SharedPrefrecesUtils;
@@ -37,10 +33,9 @@ import cn.zhiao.develop.freeofo.bean.Constants;
 import cn.zhiao.develop.freeofo.bean.User;
 import cn.zhiao.develop.freeofo.ui.CommonActivity;
 import cn.zhiao.develop.freeofo.ui.HomeFragment;
+import cn.zhiao.develop.freeofo.ui.LoginAcitvity;
 import cn.zhiao.develop.freeofo.ui.MinePwdActivity;
 import cn.zhiao.develop.freeofo.ui.PayChoocesActivity;
-import cn.zhiao.develop.freeofo.ui.chatkit.CustomUserProvider;
-import de.greenrobot.event.EventBus;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends BaseActivity {
@@ -64,12 +59,10 @@ public class MainActivity extends BaseActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private User userL;
     private FeedbackAgent agent;
-    public static List<LCChatKitUser> partUsers = new ArrayList<LCChatKitUser>();
     private boolean isRecvMsg = false;
 
     @Override
     public void initView() {
-        EventBus.getDefault().register(this);
         BmobUpdateAgent.update(this);
         BmobUpdateAgent.setUpdateListener(new BmobUpdateListener() {
             @Override
@@ -176,7 +169,8 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initPresenter() {
         userL = (User) SharedPrefrecesUtils.readObject(getContext(), "user");
-        initLockerList();
+        //注册一个监听连接状态的listener
+        EMClient.getInstance().addConnectionListener(new MyConnectionListener());
 //        final rx.plugins.RxJavaErrorHandler rxJavaErrorHandler = new rx.plugins.RxJavaErrorHandler() {
 //            @Override
 //            public void handleError( final Throwable x ) {
@@ -199,6 +193,36 @@ public class MainActivity extends BaseActivity {
 //                .subscribe( action );
     }
 
+    //实现ConnectionListener接口
+    private class MyConnectionListener implements EMConnectionListener {
+        @Override
+        public void onConnected() {
+        }
+        @Override
+        public void onDisconnected(final int error) {
+            runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    if(error == EMError.USER_REMOVED){
+                        // 显示帐号已经被移除
+                        showToast("帐号已经被移除");
+                    }else if (error == EMError.USER_LOGIN_ANOTHER_DEVICE) {
+                        // 显示帐号在其他设备登录
+                        showToast("帐号在其他设备登录");
+                    } else {
+                        if (NetUtils.hasNetwork(MainActivity.this)){
+                            //连接不到聊天服务器
+                            showToast("连接不到聊天服务器");
+                        } else{
+                            //当前网络不可用，请检查网络设置
+                            showToast("当前网络不可用，请检查网络设置");
+                        }
+                    }
+                }
+            });
+        }
+    }
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_main;
@@ -236,7 +260,11 @@ public class MainActivity extends BaseActivity {
     }
 
     public void gotoSetting(View view) {
-
+        SharedPrefrecesUtils.saveObject(getContext(),"user", null);
+        SharedPrefrecesUtils.saveBooleanToSharedPrefrences("is_login",false,getContext());
+        EMClient.getInstance().logout(true);
+        finish();
+        gt(LoginAcitvity.class);
     }
 
     private void update() {
@@ -297,47 +325,14 @@ public class MainActivity extends BaseActivity {
         return super.onPrepareOptionsMenu(menu);
     }
 
-    private void initLockerList() {
-        BmobQuery<User> query = new BmobQuery<User>();
-        query.addWhereEqualTo("isLocker", true);
-        query.findObjects(new FindListener<User>() {
-            @Override
-            public void done(List<User> object, BmobException e) {
-                if(e==null){
-                    //showToast("查询用户成功:"+object.size());
-                    partUsers.clear();
-                    for (User user:object) {
-                        if(!user.getUsername().equals(userL.getUsername()))
-                            partUsers.add(new LCChatKitUser(user.getLockerId(), user.getLockerName(), user.getPhotoUrl()));
-                    }
-                    CustomUserProvider.getInstance().setAllUsers(partUsers);
-                }else{
-                    showToast("更新用户信息失败:" + e.getMessage());
-                }
-            }
-        });
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         invalidateOptionsMenu();
-    }
-
-    /**
-     * 处理推送过来的消息
-     * 同理，避免无效消息，此处加了 conversation id 判断
-     */
-    public void onEvent(LCIMIMTypeMessageEvent messageEvent) {
-        if ( null != messageEvent){
-            isRecvMsg = true;
-            invalidateOptionsMenu();
-        }
     }
 }

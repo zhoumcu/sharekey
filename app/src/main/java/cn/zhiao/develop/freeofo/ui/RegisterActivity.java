@@ -7,6 +7,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
+
 import butterknife.Bind;
 import butterknife.OnClick;
 import cn.bmob.v3.exception.BmobException;
@@ -72,6 +75,12 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void done(User s, BmobException e) {
                 if (e == null) {
+                    //注册失败会抛出HyphenateException
+                    try {
+                        EMClient.getInstance().createAccount(edPhone1, edPwd.getText().toString());//同步方法
+                    } catch (HyphenateException e1) {
+                        e1.printStackTrace();
+                    }
                     showToast("注册成功");
                     finish();
                 } else {

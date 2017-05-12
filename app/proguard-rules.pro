@@ -183,3 +183,6 @@
    public static *** i(...);
    public static *** w(...);
  }
+#环信IMSDK
+-keep class com.hyphenate.** {*;}
+-dontwarn  com.hyphenate.**

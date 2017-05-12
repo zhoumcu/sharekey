@@ -1,18 +1,15 @@
 package cn.zhiao.develop.freeofo.ui;
 
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.avos.avoscloud.im.v2.AVIMClient;
-import com.avos.avoscloud.im.v2.AVIMException;
-import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import cn.leancloud.chatkit.LCChatKit;
 import cn.zhiao.baselib.base.BaseActivity;
 import cn.zhiao.baselib.utils.SharedPrefrecesUtils;
 import cn.zhiao.develop.freeofo.MainActivity;
@@ -97,28 +94,37 @@ public class LoginAcitvity extends BaseActivity implements LoginView {
     }
 
     public void loginleanCloud(final User user) {
-        String clientId;
-        if(user.isLocker()){
-            clientId = user.getLockerId();
-        }else{
-            clientId = user.getUsername();
-        }
-        if (TextUtils.isEmpty(clientId.trim())) {
-            Toast.makeText(this, "不能为空", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        LCChatKit.getInstance().open(clientId, new AVIMClientCallback() {
+//        String clientId;
+//        if(user.isLocker()){
+//            clientId = user.getLockerId();
+//        }else{
+//            clientId = user.getUsername();
+//        }
+//        if (TextUtils.isEmpty(clientId.trim())) {
+//            Toast.makeText(this, "不能为空", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+        EMClient.getInstance().login(phone.getText().toString(),tvPwd.getText().toString(),new EMCallBack() {//回调
             @Override
-            public void done(AVIMClient avimClient, AVIMException e) {
-                if (null == e) {
-                    showToast("登录成功:");
-                    gt(MainActivity.class);
-                    finish();
-                    SharedPrefrecesUtils.saveObject(getContext(),"user", user);
-                    SharedPrefrecesUtils.saveBooleanToSharedPrefrences("is_login",true,getContext());
-                } else {
-                    showToast(e.toString());
-                }
+            public void onSuccess() {
+                EMClient.getInstance().groupManager().loadAllGroups();
+                EMClient.getInstance().chatManager().loadAllConversations();
+//                showToast("登录成功:");
+                SharedPrefrecesUtils.saveObject(getContext(),"user", user);
+                SharedPrefrecesUtils.saveBooleanToSharedPrefrences("is_login",true,getContext());
+                Log.d("main", "登录聊天服务器成功！");
+                gt(MainActivity.class);
+                finish();
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+
+            }
+
+            @Override
+            public void onError(int code, String message) {
+                Log.d("main", "登录聊天服务器失败！");
             }
         });
     }
