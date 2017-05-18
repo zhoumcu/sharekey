@@ -5,8 +5,8 @@ android {
     buildToolsVersion "24.0.2"
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 25
+        minSdkVersion 15
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -24,19 +24,21 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //compile project(':easeui')
-    compile 'com.android.support:recyclerview-v7:25.2.0'
-//    compile 'com.android.support:design:25.2.0'
+    compile 'com.android.support:recyclerview-v7:24.0.0'
+    compile 'com.android.support:design:24.0.0'
     compile 'de.greenrobot:greendao:1.3.7'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.loopj.android:android-async-http:1.4.7'
-
     compile 'de.hdodenhof:circleimageview:1.3.0'
     compile 'com.makeramen:roundedimageview:2.0.1'
-
     compile 'com.jude:easyrecyclerview:4.2.1'
-    compile 'com.facebook.fresco:fresco:1.2.0'
+//    compile 'com.facebook.fresco:fresco:1.2.0'
+    compile('com.facebook.fresco:fresco:0.6.0+') {
+        exclude group: 'com.parse.bolts',
+                module: 'bolts-android'
+    }
     //与ease冲突
-//    compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
+    //    compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
     //环信客服SDK
     //compile 'com.hyphenate:kefu-easeui-android:latest.release'
     compile('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
@@ -64,8 +66,8 @@ dependencies {
     //ocr图像识别
     //compile 'com.rmtheis:tess-two:5.4.1'
     compile 'org.greenrobot:eventbus:3.0.0'
-
-    compile 'com.umeng.analytics:analytics:latest.integration'
-
-    compile project(path: ':easeui')
+//    compile 'com.umeng.analytics:analytics:latest.integration'
+    //avoscloud-sdk 为 LeanCloud基础包
+    compile 'cn.leancloud.android:avoscloud-sdk:v3.+'
+    compile project(path: ':chatuidemo')
 }

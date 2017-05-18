@@ -7,10 +7,14 @@ import android.widget.EditText;
 
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chatuidemo.DemoApplication;
+import com.hyphenate.chatuidemo.DemoHelper;
+import com.hyphenate.chatuidemo.db.DemoDBManager;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 import cn.zhiao.baselib.base.BaseActivity;
+import cn.zhiao.baselib.utils.L;
 import cn.zhiao.baselib.utils.SharedPrefrecesUtils;
 import cn.zhiao.develop.freeofo.MainActivity;
 import cn.zhiao.develop.freeofo.R;
@@ -104,12 +108,42 @@ public class LoginAcitvity extends BaseActivity implements LoginView {
 //            Toast.makeText(this, "不能为空", Toast.LENGTH_SHORT).show();
 //            return;
 //        }
-        EMClient.getInstance().login(phone.getText().toString(),tvPwd.getText().toString(),new EMCallBack() {//回调
+        login(phone.getText().toString(),tvPwd.getText().toString(),user);
+    }
+    private void login(String currentUsername, String currentPassword, final User user){
+        // After logout，the DemoDB may still be accessed due to async callback, so the DemoDB will be re-opened again.
+        // close it before login to make sure DemoDB not overlap
+        DemoDBManager.getInstance().closeDB();
+
+        // reset current user name before login
+        DemoHelper.getInstance().setCurrentUserName(currentUsername);
+
+        final long start = System.currentTimeMillis();
+        // call login method
+        L.d("EMClient.getInstance().login");
+        EMClient.getInstance().login(currentUsername, currentPassword, new EMCallBack() {
+
             @Override
             public void onSuccess() {
+                L.d( "login: onSuccess");
+
+                // ** manually load all local groups and conversation
                 EMClient.getInstance().groupManager().loadAllGroups();
                 EMClient.getInstance().chatManager().loadAllConversations();
-//                showToast("登录成功:");
+
+                // update current user's display name for APNs
+                boolean updatenick = EMClient.getInstance().pushManager().updatePushNickname(
+                        DemoApplication.currentUserNick.trim());
+                if (!updatenick) {
+                    Log.e("LoginActivity", "update current user nick fail");
+                }
+
+//                if (!LoginActivity.this.isFinishing() && pd.isShowing()) {
+//                    pd.dismiss();
+//                }
+                // get user's info (this should be get from App's server or 3rd party service)
+                DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
+
                 SharedPrefrecesUtils.saveObject(getContext(),"user", user);
                 SharedPrefrecesUtils.saveBooleanToSharedPrefrences("is_login",true,getContext());
                 Log.d("main", "登录聊天服务器成功！");
@@ -119,12 +153,22 @@ public class LoginAcitvity extends BaseActivity implements LoginView {
 
             @Override
             public void onProgress(int progress, String status) {
-
+                L.d( "login: onProgress");
             }
 
             @Override
-            public void onError(int code, String message) {
-                Log.d("main", "登录聊天服务器失败！");
+            public void onError(final int code, final String message) {
+                L.d( "login: onError: " + code);
+//                if (!progressShow) {
+//                    return;
+//                }
+//                runOnUiThread(new Runnable() {
+//                    public void run() {
+//                        pd.dismiss();
+//                        Toast.makeText(getApplicationContext(), getString(com.hyphenate.chatuidemo.R.string.Login_failed) + message,
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+//                });
             }
         });
     }

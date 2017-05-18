@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.multidex.MultiDex;
 
+import com.avos.avoscloud.AVOSCloud;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.easeui.controller.EaseUI;
@@ -44,11 +45,12 @@ public class App extends BaseApplication{
     public void onCreate() {
         super.onCreate();
         initBmob();
-        regiesterEaseMob();
+//        regiesterEaseMob();
 //        initUmengPush();
 //        PgyCrashManager.register(this);
         EventBus.builder().throwSubscriberException(BuildConfig.DEBUG).installDefaultEventBus();
 //        BP.init("25fbbe530d801ab95a2723acf03c50b6");
+        AVOSCloud.initialize(this,"YN8irJOPJnWukhHem1BSl7qY-gzGzoHsz","9ToLV1p8ous2eOj9Paje8Umt");
     }
     private void regiesterEaseMob(){
         int pid = android.os.Process.myPid();
@@ -63,7 +65,7 @@ public class App extends BaseApplication{
         }
         EMOptions options = new EMOptions();
         // 默认添加好友时，是不需要验证的，改成需要验证
-        options.setAcceptInvitationAlways(false);
+        options.setAcceptInvitationAlways(true);
         //初始化
         EMClient.getInstance().init(this, options);
         //在做打包混淆时，关闭debug模式，避免消耗不必要的资源

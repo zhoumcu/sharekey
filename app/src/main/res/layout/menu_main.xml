@@ -65,6 +65,7 @@
             android:layout_marginTop="50dp"
             android:orientation="vertical">
             <LinearLayout
+                android:visibility="gone"
                 style="@style/menu_layout_style"
                 android:onClick="gotoWallet">
 
@@ -89,9 +90,12 @@
                 <ImageView style="@style/menu_right_arrow_style" />
             </LinearLayout>
 
-            <View style="@style/menu_divider_style" />
+            <View style="@style/menu_divider_style"
+                android:visibility="gone"/>
 
-            <LinearLayout style="@style/menu_layout_style"
+            <LinearLayout
+                android:visibility="gone"
+                style="@style/menu_layout_style"
                 android:onClick="gotoWork">
 
                 <ImageView

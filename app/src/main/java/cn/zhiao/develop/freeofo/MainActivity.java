@@ -31,7 +31,6 @@ import cn.zhiao.baselib.base.BaseActivity;
 import cn.zhiao.baselib.utils.SharedPrefrecesUtils;
 import cn.zhiao.develop.freeofo.bean.Constants;
 import cn.zhiao.develop.freeofo.bean.User;
-import cn.zhiao.develop.freeofo.ui.CommonActivity;
 import cn.zhiao.develop.freeofo.ui.HomeFragment;
 import cn.zhiao.develop.freeofo.ui.LoginAcitvity;
 import cn.zhiao.develop.freeofo.ui.MinePwdActivity;
@@ -263,6 +262,7 @@ public class MainActivity extends BaseActivity {
         SharedPrefrecesUtils.saveObject(getContext(),"user", null);
         SharedPrefrecesUtils.saveBooleanToSharedPrefrences("is_login",false,getContext());
         finish();
+        EMClient.getInstance().logout(true);
         gt(LoginAcitvity.class);
     }
 
@@ -304,7 +304,7 @@ public class MainActivity extends BaseActivity {
         switch (item.getItemId()){
             case R.id.menu_share:
                 isRecvMsg = false;
-                gt(CommonActivity.class);
+                gt(com.hyphenate.chatuidemo.ui.MainActivity.class);
                 break;
         }
         return super.onOptionsItemSelected(item);
