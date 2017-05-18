@@ -357,4 +357,6 @@ public  abstract class BaseActivity extends AppCompatActivity implements IBaseVi
         finish();
         gt(cl);
     }
+
+
 }

@@ -1,11 +1,11 @@
 package cn.zhiao.baselib.app;
 
+import android.app.Application;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.DisplayMetrics;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.hyphenate.chatuidemo.DemoApplication;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
@@ -23,7 +23,7 @@ import java.util.Locale;
  *
  * @author Ht
  */
-public class BaseApplication extends DemoApplication {
+public class BaseApplication extends Application {
     private static BaseApplication mInstance;
 
     /**

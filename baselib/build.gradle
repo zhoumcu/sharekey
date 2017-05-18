@@ -66,8 +66,8 @@ dependencies {
     //ocr图像识别
     //compile 'com.rmtheis:tess-two:5.4.1'
     compile 'org.greenrobot:eventbus:3.0.0'
-//    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.umeng.analytics:analytics:latest.integration'
     //avoscloud-sdk 为 LeanCloud基础包
     compile 'cn.leancloud.android:avoscloud-sdk:v3.+'
-    compile project(path: ':chatuidemo')
+    compile project(':redpacketlibrary')
 }

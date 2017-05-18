@@ -88,7 +88,7 @@
             android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/bt_book_selector"
-            android:text="@string/save"
+            android:text="@string/saves"
             android:textColor="@color/white_dd"
             android:textSize="18sp" />
 

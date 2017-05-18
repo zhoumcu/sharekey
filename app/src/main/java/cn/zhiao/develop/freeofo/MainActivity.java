@@ -1,10 +1,12 @@
 package cn.zhiao.develop.freeofo;
 
 import android.graphics.Color;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,15 +14,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.avos.avoscloud.feedback.FeedbackAgent;
+import com.easemob.redpacket.utils.RedPacketUtil;
+import com.easemob.redpacketsdk.constant.RPConstant;
 import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMError;
+import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMCmdMessageBody;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chatuidemo.DemoHelper;
 import com.hyphenate.util.NetUtils;
 import com.qq.e.ads.banner.ADSize;
 import com.qq.e.ads.banner.AbstractBannerADListener;
 import com.qq.e.ads.banner.BannerView;
 import com.qq.e.ads.interstitial.AbstractInterstitialADListener;
 import com.qq.e.ads.interstitial.InterstitialAD;
+
+import java.util.List;
 
 import butterknife.Bind;
 import cn.bmob.v3.listener.BmobUpdateListener;
@@ -35,6 +45,7 @@ import cn.zhiao.develop.freeofo.ui.HomeFragment;
 import cn.zhiao.develop.freeofo.ui.LoginAcitvity;
 import cn.zhiao.develop.freeofo.ui.MinePwdActivity;
 import cn.zhiao.develop.freeofo.ui.PayChoocesActivity;
+import cn.zhiao.develop.freeofo.ui.SavePwdFragment;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends BaseActivity {
@@ -58,7 +69,6 @@ public class MainActivity extends BaseActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private User userL;
     private FeedbackAgent agent;
-    private boolean isRecvMsg = false;
 
     @Override
     public void initView() {
@@ -104,7 +114,7 @@ public class MainActivity extends BaseActivity {
         userPhone.setText(userL.getUsername());
         //initBanner();
         //initInterstitialAD();
-
+        App.getInstance().addActivity(this);
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -168,8 +178,9 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initPresenter() {
         userL = (User) SharedPrefrecesUtils.readObject(getContext(), "user");
+        EMClient.getInstance().chatManager().addMessageListener(messageListener);
         //注册一个监听连接状态的listener
-        EMClient.getInstance().addConnectionListener(new MyConnectionListener());
+//        EMClient.getInstance().addConnectionListener(new MyConnectionListener());
 //        final rx.plugins.RxJavaErrorHandler rxJavaErrorHandler = new rx.plugins.RxJavaErrorHandler() {
 //            @Override
 //            public void handleError( final Throwable x ) {
@@ -192,6 +203,46 @@ public class MainActivity extends BaseActivity {
 //                .subscribe( action );
     }
 
+    EMMessageListener messageListener = new EMMessageListener() {
+
+        @Override
+        public void onMessageReceived(List<EMMessage> messages) {
+            // notify new message
+            for (EMMessage message : messages) {
+                DemoHelper.getInstance().getNotifier().onNewMsg(message);
+            }
+            refreshUIWithMessage();
+        }
+
+        @Override
+        public void onCmdMessageReceived(List<EMMessage> messages) {
+            //red packet code : 处理红包回执透传消息
+            for (EMMessage message : messages) {
+                EMCmdMessageBody cmdMsgBody = (EMCmdMessageBody) message.getBody();
+                final String action = cmdMsgBody.action();//获取自定义action
+                if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)) {
+                    RedPacketUtil.receiveRedPacketAckMessage(message);
+                }
+            }
+            //end of red packet code
+            refreshUIWithMessage();
+        }
+
+        @Override
+        public void onMessageRead(List<EMMessage> messages) {
+        }
+
+        @Override
+        public void onMessageDelivered(List<EMMessage> message) {
+        }
+
+        @Override
+        public void onMessageChanged(EMMessage message, Object change) {}
+    };
+    private void refreshUIWithMessage() {
+        SharedPrefrecesUtils.saveBooleanToSharedPrefrences("isRecvMsg",true,getContext());
+        invalidateOptionsMenu();
+    }
     //实现ConnectionListener接口
     private class MyConnectionListener implements EMConnectionListener {
         @Override
@@ -303,7 +354,7 @@ public class MainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_share:
-                isRecvMsg = false;
+                SharedPrefrecesUtils.saveBooleanToSharedPrefrences("isRecvMsg",false,getContext());
                 gt(com.hyphenate.chatuidemo.ui.MainActivity.class);
                 break;
         }
@@ -313,7 +364,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         System.out.println("执行了onPrepareOptionsMenu");
-        if (isRecvMsg) {
+        if (SharedPrefrecesUtils.getBooleanFromSharedPrefrences("isRecvMsg",getContext())) {
             menu.findItem(R.id.menu_share).setIcon(
                     R.mipmap.chat);
         } else {
@@ -322,6 +373,21 @@ public class MainActivity extends BaseActivity {
         }
         // getSupportMenuInflater().inflate(R.menu.book_detail, menu);
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            int size = getBaseFragmentManager().getFragments().size();
+            Fragment fragment = getBaseFragmentManager().findFragmentByTag(SavePwdFragment.MY_TAG);
+            if(fragment!=null) {
+               removeFragment(fragment);
+            }else {
+                moveTaskToBack(true);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override

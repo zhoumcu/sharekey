@@ -6,8 +6,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chatuidemo.DemoHelper;
 import com.hyphenate.exceptions.HyphenateException;
 
 import butterknife.Bind;
@@ -76,13 +79,46 @@ public class RegisterActivity extends BaseActivity {
             public void done(User s, BmobException e) {
                 if (e == null) {
                     //注册失败会抛出HyphenateException
-                    try {
-                        EMClient.getInstance().createAccount(edPhone1, edPwd.getText().toString());//同步方法
-                    } catch (HyphenateException e1) {
-                        e1.printStackTrace();
-                    }
-                    showToast("注册成功");
-                    finish();
+//                    try {
+//                        EMClient.getInstance().createAccount(edPhone1, edPwd.getText().toString());//同步方法
+//                    } catch (HyphenateException e1) {
+//                        e1.printStackTrace();
+//                    }
+//                    showToast("注册成功");
+//                    finish();
+                    new Thread(new Runnable() {
+                        public void run() {
+                            try {
+                                // call method in SDK
+                                EMClient.getInstance().createAccount(edPhone1, edPwd.getText().toString());
+                                runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        // save current user
+                                        DemoHelper.getInstance().setCurrentUserName(edPhone1);
+                                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.Registered_successfully), Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                });
+                            } catch (final HyphenateException e) {
+                                runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        int errorCode=e.getErrorCode();
+                                        if(errorCode== EMError.NETWORK_ERROR){
+                                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.network_anomalies), Toast.LENGTH_SHORT).show();
+                                        }else if(errorCode == EMError.USER_ALREADY_EXIST){
+                                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.User_already_exists), Toast.LENGTH_SHORT).show();
+                                        }else if(errorCode == EMError.USER_AUTHENTICATION_FAILED){
+                                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.registration_failed_without_permission), Toast.LENGTH_SHORT).show();
+                                        }else if(errorCode == EMError.USER_ILLEGAL_ARGUMENT){
+                                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.illegal_user_name),Toast.LENGTH_SHORT).show();
+                                        }else{
+                                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.Registration_failed), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }).start();
                 } else {
                     showToast(e.getMessage());
                 }

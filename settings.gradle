@@ -1,1 +1,1 @@
-include ':app', ':baselib', ':easeui', ':redpacketlibrary', ':chatuidemo'
+include ':app', ':baselib', ':easeui', ':redpacketlibrary'

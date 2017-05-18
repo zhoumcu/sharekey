@@ -17,7 +17,7 @@
             android:id="@+id/notify"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/notify"
+            android:text="@string/notifys"
             android:padding="10dp"
             android:background="@color/color_bb343333"
             android:textColor="@color/red"
@@ -119,7 +119,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bt_book_selector"
-                android:text="@string/save"
+                android:text="@string/saves"
                 android:textColor="@color/white_dd"
                 android:textSize="18sp" />
             <TextView

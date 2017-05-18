@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/FreeOfo.iml" filepath="$PROJECT_DIR$/FreeOfo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/baselib/baselib.iml" filepath="$PROJECT_DIR$/baselib/baselib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/chatuidemo/chatuidemo.iml" filepath="$PROJECT_DIR$/chatuidemo/chatuidemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/easeui/easeui.iml" filepath="$PROJECT_DIR$/easeui/easeui.iml" />
       <module fileurl="file://$PROJECT_DIR$/redpacketlibrary/redpacketlibrary.iml" filepath="$PROJECT_DIR$/redpacketlibrary/redpacketlibrary.iml" />
     </modules>

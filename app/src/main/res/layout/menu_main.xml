@@ -228,7 +228,7 @@
 
                 <TextView
                     style="@style/menu_text_style"
-                    android:text="@string/setting" />
+                    android:text="@string/settings" />
 
                 <View
                     android:layout_width="0dp"

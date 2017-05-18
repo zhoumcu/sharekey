@@ -1,5 +1,6 @@
 package cn.zhiao.develop.freeofo;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -8,12 +9,14 @@ import android.support.multidex.MultiDex;
 import com.avos.avoscloud.AVOSCloud;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
+import com.hyphenate.chatuidemo.DemoApplication;
 import com.hyphenate.easeui.controller.EaseUI;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,7 +25,6 @@ import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
 import cn.bmob.v3.BmobInstallation;
 import cn.bmob.v3.update.BmobUpdateAgent;
-import cn.zhiao.baselib.app.BaseApplication;
 import cn.zhiao.baselib.utils.L;
 
 /**
@@ -31,10 +33,15 @@ import cn.zhiao.baselib.utils.L;
  * email：1032324589@qq.com
  */
 
-public class App extends BaseApplication{
+public class App extends DemoApplication{
+    private static App instance;
     private final String APP_ID = "YN8irJOPJnWukhHem1BSl7qY-gzGzoHsz";
     private final String APP_KEY = "9ToLV1p8ous2eOj9Paje8Umt";
+    private List<Activity> mList = new ArrayList<>();
 
+    public static App getInstance() {
+        return instance;
+    }
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
@@ -45,6 +52,7 @@ public class App extends BaseApplication{
     public void onCreate() {
         super.onCreate();
         initBmob();
+        instance = this;
 //        regiesterEaseMob();
 //        initUmengPush();
 //        PgyCrashManager.register(this);
@@ -131,5 +139,21 @@ public class App extends BaseApplication{
             }
         }
         return processName;
+    }
+    // add Activity
+    public void addActivity(Activity activity) {
+        mList.add(activity);
+    }
+    public void exit() {
+        try {
+            for (Activity activity : mList) {
+                if (activity != null)
+                    activity.finish();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            //System.exit(0);
+        }
     }
 }

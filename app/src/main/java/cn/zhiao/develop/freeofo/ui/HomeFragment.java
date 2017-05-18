@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hyphenate.chatuidemo.ui.MainActivity;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -67,9 +69,9 @@ public class HomeFragment extends BaseFragment implements HomeView {
 
     @Override
     public void initView() {
-        url = CommonUtil.getCompleteUrl(getResources().getString(R.string.notify));
+        url = CommonUtil.getCompleteUrl(getResources().getString(R.string.notifys));
         notify.setText(SharedPrefrecesUtils.getStrFromSharedPrefrences(Constants.MSG, getContext()) == "" ?
-                getResources().getString(R.string.notify) : SharedPrefrecesUtils.getStrFromSharedPrefrences(Constants.MSG, getContext()));
+                getResources().getString(R.string.notifys) : SharedPrefrecesUtils.getStrFromSharedPrefrences(Constants.MSG, getContext()));
     }
 
     @Override
@@ -138,7 +140,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
                 }
                 break;
             case R.id.btn_lockers:
-                gt(CommonActivity.class);
+                gt(MainActivity.class);
                 break;
         }
     }
