@@ -681,7 +681,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 
 	Dialog createMemberMenuDialog() {
 		final Dialog dialog = new Dialog(GroupDetailsActivity.this);
-		dialog.setTitle("群组");
+		dialog.setTitle(R.string.group);
 		dialog.setContentView(R.layout.em_chatroom_member_menu);
 
 		int ids[] = { R.id.menu_item_add_admin,

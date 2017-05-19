@@ -120,12 +120,12 @@
         "source": "E:\\2016\\android\\FreeOfo\\redpacketlibrary\\build\\intermediates\\exploded-aar\\com.hyphenate.redpacket\\redpacket-alipay\\1.1.2\\res\\layout\\rp_fragment_single_chat_packet.xml"
     },
     {
-        "merged": "E:\\2016\\android\\FreeOfo\\redpacketlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\ease_row_sent_voice_call.xml",
-        "source": "E:\\2016\\android\\FreeOfo\\redpacketlibrary\\build\\intermediates\\exploded-aar\\FreeOfo\\easeui\\unspecified\\res\\layout\\ease_row_sent_voice_call.xml"
-    },
-    {
         "merged": "E:\\2016\\android\\FreeOfo\\redpacketlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\ease_widget_voice_recorder.xml",
         "source": "E:\\2016\\android\\FreeOfo\\redpacketlibrary\\build\\intermediates\\exploded-aar\\FreeOfo\\easeui\\unspecified\\res\\layout\\ease_widget_voice_recorder.xml"
+    },
+    {
+        "merged": "E:\\2016\\android\\FreeOfo\\redpacketlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\ease_row_sent_voice_call.xml",
+        "source": "E:\\2016\\android\\FreeOfo\\redpacketlibrary\\build\\intermediates\\exploded-aar\\FreeOfo\\easeui\\unspecified\\res\\layout\\ease_row_sent_voice_call.xml"
     },
     {
         "merged": "E:\\2016\\android\\FreeOfo\\redpacketlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\rp_activity_group_member.xml",

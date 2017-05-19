@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Hyphenate Demo</string>
     <string name="app_slogon">IM as a service</string>
     <string name="text_ack_msg">Read</string>
     <string name="text_delivered_msg">Delivered</string>
@@ -374,4 +373,19 @@
     <string name="Failed_to_create_chat_room">Failed to create chat room</string>
 
     <string name="mail_log_title">Send mail, contain logs</string>
+
+    <string name="members_mute_blacklist">members</string>
+    <string name="Owner_and_administrators">Owner and administrators</string>
+    <string name="add_to_administrator">add to administrator</string>
+    <string name="remove_admin_privilege">remove admin privilege</string>
+    <string name="transfer_owner_ship">transfer owner ship</string>
+    <string name="remove_member">remove member</string>
+    <string name="add_to_black_list">add to black list</string>
+    <string name="remove_from_black_list">remove from black list</string>
+    <string name="unmute">unmute</string>
+    <string name="mute1">mute</string>
+    <string name="group">group</string>
+    <string name="create_chat_room">create chat room</string>
+
+    <string name="button_send_msg">message</string>
 </resources>

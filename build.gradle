@@ -24,7 +24,7 @@ allprojects {
         maven { url "https://raw.githubusercontent.com/Pgyer/mvn_repo_pgyer/master" }
         // 这里是 LeanCloud 的包仓库
         maven { url "http://mvn.leancloud.cn/nexus/content/repositories/public" }
-        maven {  url "https://raw.githubusercontent.com/HyphenateInc/Hyphenate-SDK-Android/master/repository" }
+        maven { url "https://raw.githubusercontent.com/HyphenateInc/Hyphenate-SDK-Android/master/repository" }
     }
 }
 

@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.hyphenate.EMValueCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chatuidemo.Constant;
 import com.hyphenate.chatuidemo.DemoHelper;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.utils.EaseUserUtils;
@@ -42,9 +44,10 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 	private TextView tvUsername;
 	private ProgressDialog dialog;
 	private RelativeLayout rlNickName;
-	
-	
-	
+	private Button btnSendMsg;
+	private String username;
+
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -60,20 +63,27 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 		tvNickName = (TextView) findViewById(R.id.user_nickname);
 		rlNickName = (RelativeLayout) findViewById(R.id.rl_nickname);
 		iconRightArrow = (ImageView) findViewById(R.id.ic_right_arrow);
+		btnSendMsg = (Button) findViewById(R.id.btn_sendmsg);
 	}
 	
 	private void initListener() {
 		Intent intent = getIntent();
-		String username = intent.getStringExtra("username");
+		username = intent.getStringExtra("username");
 		boolean enableUpdate = intent.getBooleanExtra("setting", false);
 		if (enableUpdate) {
 			headPhotoUpdate.setVisibility(View.VISIBLE);
 			iconRightArrow.setVisibility(View.VISIBLE);
+			btnSendMsg.setVisibility(View.GONE);
 			rlNickName.setOnClickListener(this);
 			headAvatar.setOnClickListener(this);
 		} else {
 			headPhotoUpdate.setVisibility(View.GONE);
+			btnSendMsg.setVisibility(View.VISIBLE);
+			btnSendMsg.setOnClickListener(this);
 			iconRightArrow.setVisibility(View.INVISIBLE);
+		}
+		if (username.equals(EMClient.getInstance().getCurrentUser())){
+			btnSendMsg.setVisibility(View.GONE);
 		}
 		if(username != null){
     		if (username.equals(EMClient.getInstance().getCurrentUser())) {
@@ -94,7 +104,6 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 		int i = v.getId();
 		if (i == R.id.user_head_avatar) {
 			uploadHeadPhoto();
-
 		} else if (i == R.id.rl_nickname) {
 			final EditText editText = new EditText(this);
 			new Builder(this).setTitle(R.string.setting_nickname).setIcon(android.R.drawable.ic_dialog_info).setView(editText)
@@ -111,9 +120,13 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 						}
 					}).setNegativeButton(R.string.dl_cancel, null).show();
 
-		} else {
+		} else if (i == R.id.btn_sendmsg){
+			// start chat acitivity
+			Intent intentChat = new Intent(getBaseContext(), ChatActivity.class);
+			// it's single chat
+			intentChat.putExtra(Constant.EXTRA_USER_ID, username);
+			startActivity(intentChat);
 		}
-
 	}
 	
 	public void asyncFetchUserInfo(String username){

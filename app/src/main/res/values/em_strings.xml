@@ -373,6 +373,7 @@
     <string name="Failed_to_create_chat_room">创建聊天室失败</string>
 
     <string name="mail_log_title">发送邮件附件中包含log</string>
+
     <string name="members_mute_blacklist">成员</string>
     <string name="Owner_and_administrators">群主与管理员</string>
     <string name="add_to_administrator">设置为管理员</string>
@@ -383,4 +384,7 @@
     <string name="remove_from_black_list">从黑名单中移除</string>
     <string name="unmute">解除禁言</string>
     <string name="mute1">禁言</string>
+    <string name="group">群组</string>
+    <string name="create_chat_room">创建新聊天室</string>
+    <string name="button_send_msg">发送消息</string>
 </resources>

@@ -180,12 +180,12 @@
         "source": "E:\\2016\\android\\FreeOfo\\easeui\\res\\drawable-hdpi\\ee_11.png"
     },
     {
-        "merged": "E:\\2016\\android\\FreeOfo\\easeui\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ee_30.png",
-        "source": "E:\\2016\\android\\FreeOfo\\easeui\\res\\drawable-hdpi\\ee_30.png"
-    },
-    {
         "merged": "E:\\2016\\android\\FreeOfo\\easeui\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ee_33.png",
         "source": "E:\\2016\\android\\FreeOfo\\easeui\\res\\drawable-hdpi\\ee_33.png"
+    },
+    {
+        "merged": "E:\\2016\\android\\FreeOfo\\easeui\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ee_30.png",
+        "source": "E:\\2016\\android\\FreeOfo\\easeui\\res\\drawable-hdpi\\ee_30.png"
     },
     {
         "merged": "E:\\2016\\android\\FreeOfo\\easeui\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ee_2.png",

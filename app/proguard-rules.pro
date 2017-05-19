@@ -186,6 +186,12 @@
 #环信IMSDK
 -keep class com.hyphenate.** {*;}
 -dontwarn  com.hyphenate.**
+-keep class com.hyphenate.chat.** {*;}
+
+-keep class org.xmlpull.** {*;}
+-keep class com.baidu.** {*;}
+-keep class com.squareup.picasso.* {*;}
+-keep class com.superrtc.**{*;}
 
 -keep class com.easemob.** {*;}
 -keep class org.jivesoftware.** {*;}
@@ -209,3 +215,15 @@
 -keep class org.bitlet.** {*;}
 -keep class org.slf4j.** {*;}
 -keep class ch.imvs.** {*;}
+
+-dontwarn com.google.android.gms.**
+-keep class com.google.android.gms.**{*;}
+
+-dontwarn com.alipay.android.**
+-keep class com.alipay.android.**{*;}
+
+-dontwarn com.umeng.update.**
+-keep class com.umeng.update.**{*;}
+
+-dontwarn android.webkit.**
+-keep class android.webkit.**{*;}

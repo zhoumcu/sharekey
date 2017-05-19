@@ -1,7 +1,6 @@
 package cn.zhiao.develop.freeofo;
 
 import android.graphics.Color;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -45,7 +44,6 @@ import cn.zhiao.develop.freeofo.ui.HomeFragment;
 import cn.zhiao.develop.freeofo.ui.LoginAcitvity;
 import cn.zhiao.develop.freeofo.ui.MinePwdActivity;
 import cn.zhiao.develop.freeofo.ui.PayChoocesActivity;
-import cn.zhiao.develop.freeofo.ui.SavePwdFragment;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends BaseActivity {
@@ -69,6 +67,7 @@ public class MainActivity extends BaseActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private User userL;
     private FeedbackAgent agent;
+    private HomeFragment homefragment;
 
     @Override
     public void initView() {
@@ -110,7 +109,8 @@ public class MainActivity extends BaseActivity {
         mDrawerToggle.syncState();
         dlLeft.setDrawerListener(mDrawerToggle);
         tvVersion.setText("V" + BaseApplication.getVersion());
-        addFragment(R.id.containers, new HomeFragment());
+        homefragment = new HomeFragment();
+        addFragment(R.id.containers, homefragment);
         userPhone.setText(userL.getUsername());
         //initBanner();
         //initInterstitialAD();
@@ -378,11 +378,10 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            int size = getBaseFragmentManager().getFragments().size();
-            Fragment fragment = getBaseFragmentManager().findFragmentByTag(SavePwdFragment.MY_TAG);
-            if(fragment!=null) {
-               removeFragment(fragment);
-            }else {
+            int size = getBaseFragmentManager().getBackStackEntryCount();
+            if(getBaseFragmentManager().getBackStackEntryCount()>=1){
+                getBaseFragmentManager().popBackStack();
+            }else{
                 moveTaskToBack(true);
             }
             return true;
