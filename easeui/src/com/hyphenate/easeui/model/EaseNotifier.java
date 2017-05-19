@@ -314,7 +314,7 @@ public class EaseNotifier {
             if(settingsProvider.isMsgSoundAllowed(message)){
                 if (ringtone == null) {
                     //Uri notificationUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                    Uri notificationUri = Uri.parse("android.resource://" + packageName + "/" + R.raw.pizzicato );
+                    Uri notificationUri = Uri.parse("android.resource://" + packageName + "/" + R.raw.tinkerbell );
                     ringtone = RingtoneManager.getRingtone(appContext, notificationUri);
                     if (ringtone == null) {
                         EMLog.d(TAG, "cant find ringtone at:" + notificationUri.getPath());

@@ -144,12 +144,12 @@
         "source": "E:\\2016\\android\\FreeOfo\\easeui\\res\\drawable-hdpi\\ease_chatting_biaoqing_btn_enable.png"
     },
     {
-        "merged": "E:\\2016\\android\\FreeOfo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_chat_video_mask_to.9.png",
-        "source": "E:\\2016\\android\\FreeOfo\\easeui\\res\\drawable-hdpi\\ease_chat_video_mask_to.9.png"
-    },
-    {
         "merged": "E:\\2016\\android\\FreeOfo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_settings_normal.png",
         "source": "E:\\2016\\android\\FreeOfo\\easeui\\res\\drawable-hdpi\\ease_settings_normal.png"
+    },
+    {
+        "merged": "E:\\2016\\android\\FreeOfo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_chat_video_mask_to.9.png",
+        "source": "E:\\2016\\android\\FreeOfo\\easeui\\res\\drawable-hdpi\\ease_chat_video_mask_to.9.png"
     },
     {
         "merged": "E:\\2016\\android\\FreeOfo\\easeui\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ee_35.png",

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="E:\2016\android\FreeOfo\redpacketlibrary\libs"><file name="alipaySdk-20161129.jar" path="E:\2016\android\FreeOfo\redpacketlibrary\libs\alipaySdk-20161129.jar"/><file name="volley-1.0.19.jar" path="E:\2016\android\FreeOfo\redpacketlibrary\libs\volley-1.0.19.jar"/></source></dataSet><dataSet config="debug"><source path="E:\2016\android\FreeOfo\redpacketlibrary\build-types\debug\jniLibs"/></dataSet></merger>

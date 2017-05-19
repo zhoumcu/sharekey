@@ -668,6 +668,7 @@ containing a value of this type.
     }
     public static final class raw {
         public static int pizzicato=0x7f050000;
+        public static int tinkerbell=0x7f050001;
     }
     public static final class string {
         public static int Add_a_button_was_clicked=0x7f080000;
