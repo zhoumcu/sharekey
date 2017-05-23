@@ -67,10 +67,16 @@
                     android:hint="输入车牌号码"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
-                    android:layout_width="match_parent"
+                    android:layout_width="180dp"
                     android:layout_height="40dp"
                     android:inputType="number"/>
-
+                <ImageView
+                    android:id="@+id/btn_unlock"
+                    android:src="@mipmap/enter"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <TextView
@@ -85,18 +91,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <Button
-                    android:id="@+id/btn_unlock"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/bt_book_selector"
-                    android:text="@string/unlock_im"
-                    android:textColor="@color/white_dd"
-                    android:textSize="18sp" />
+
                 <Button
                     android:id="@+id/btn_lockers"
                     android:layout_weight="1"

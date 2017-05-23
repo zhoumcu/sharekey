@@ -94,10 +94,7 @@ public class CommonUtil {
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(inputStr);
 
-        if (matcher.matches())
-            return true;
-        else
-            return false;
+        return matcher.matches();
     }
     /**
      * //获取完整的域名
@@ -218,13 +215,10 @@ public class CommonUtil {
         int serverVersionFirst = Integer.parseInt(server[0]);
         int serverVersionSecond = Integer.parseInt(server[1]);
         int serverVersionThird = Integer.parseInt(server[2]);
-        if (serverVersionFirst > localVersionFirst
+        return serverVersionFirst > localVersionFirst
                 || (serverVersionFirst == localVersionFirst && serverVersionSecond > localVersionSecond)
                 || (serverVersionFirst == localVersionFirst
-                && serverVersionSecond == localVersionSecond && serverVersionThird > localVersionThird)) {
-            return true;
-        }
-        return false;
+                && serverVersionSecond == localVersionSecond && serverVersionThird > localVersionThird);
 
     }
 
@@ -269,10 +263,7 @@ public class CommonUtil {
      * @return
      */
     public static boolean isExistValue(String value) {
-        if (value != null && !"".equals(value) && !"null".equals(value)) {
-            return true;
-        }
-        return false;
+        return value != null && !"".equals(value) && !"null".equals(value);
     }
 
     /**
@@ -588,11 +579,7 @@ public class CommonUtil {
     public static boolean isZh() {
         Locale locale = BaseApplication.getInstance().getResources().getConfiguration().locale;
         String language = locale.getLanguage();
-        if (language.startsWith("zh")) {
-            return true;
-        } else {
-            return false;
-        }
+        return language.startsWith("zh");
     }
 
     /**

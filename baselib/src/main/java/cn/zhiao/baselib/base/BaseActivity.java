@@ -341,7 +341,7 @@ public  abstract class BaseActivity extends AppCompatActivity implements IBaseVi
     /**
      * 关闭软键盘
      */
-    private void closeKeyboard() {
+    public void closeKeyboard() {
         View view = getWindow().peekDecorView();
         if (view != null) {
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

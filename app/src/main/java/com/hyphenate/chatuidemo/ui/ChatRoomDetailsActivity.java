@@ -667,7 +667,7 @@ public class ChatRoomDetailsActivity extends BaseActivity implements OnClickList
 
                     boolean[] normalVisibilities = {
                             false,      //R.id.menu_item_transfer_owner,
-                            isCurrentOwner(room) ? true : false,       //R.id.menu_item_add_admin,
+							isCurrentOwner(room),       //R.id.menu_item_add_admin,
                             false,      //R.id.menu_item_rm_admin,
                             true,       //R.id.menu_item_remove_member,
                             true,       //R.id.menu_item_add_to_blacklist,
@@ -689,7 +689,7 @@ public class ChatRoomDetailsActivity extends BaseActivity implements OnClickList
 
                     boolean[] muteListVisibilities = {
                             false,      //R.id.menu_item_transfer_owner,
-                            isCurrentOwner(room) ? true : false,       //R.id.menu_item_add_admin,
+							isCurrentOwner(room),       //R.id.menu_item_add_admin,
                             false,      //R.id.menu_item_rm_admin,
                             true,       //R.id.menu_item_remove_member,
                             true,       //R.id.menu_item_add_to_blacklist,

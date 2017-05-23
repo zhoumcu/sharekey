@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -109,9 +110,11 @@ public class MainActivity extends BaseActivity {
         mDrawerToggle.syncState();
         dlLeft.setDrawerListener(mDrawerToggle);
         tvVersion.setText("V" + BaseApplication.getVersion());
-        homefragment = new HomeFragment();
+        if(homefragment==null)
+            homefragment = new HomeFragment();
         addFragment(R.id.containers, homefragment);
-        userPhone.setText(userL.getUsername());
+        if(!TextUtils.isEmpty(userL.getUsername()))
+            userPhone.setText(userL.getUsername());
         //initBanner();
         //initInterstitialAD();
         App.getInstance().addActivity(this);

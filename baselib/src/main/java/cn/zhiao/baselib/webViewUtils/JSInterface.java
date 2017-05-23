@@ -111,7 +111,7 @@ public class JSInterface {
     @JavascriptInterface
     public void notificationBar(String titleName, String contentText) {
         Context context = BaseApplication.getInstance();
-        NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+        NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         // 实例化通知栏构造器
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
         //

@@ -16,5 +16,5 @@ public interface LoginPresenter {
      * @param username
      * @param password
      */
-    public void login(EditText username, EditText password, LoginView loginView);
+    void login(EditText username, EditText password, LoginView loginView);
 }

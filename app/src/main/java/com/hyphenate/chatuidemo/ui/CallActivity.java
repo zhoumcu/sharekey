@@ -85,7 +85,7 @@ public class CallActivity extends BaseActivity {
                 // set the user-defined extension field
                 message.setAttribute("em_apns_ext", true);
                 
-                message.setAttribute("is_voice_call", callType == 0 ? true : false);
+                message.setAttribute("is_voice_call", callType == 0);
                 
                 message.setMessageStatusCallback(new EMCallBack(){
 

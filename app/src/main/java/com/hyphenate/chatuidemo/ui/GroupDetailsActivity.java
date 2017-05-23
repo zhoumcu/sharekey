@@ -224,12 +224,9 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 	}
 
 	boolean isCanAddMember(EMGroup group) {
-		if (group.isMemberAllowToInvite() ||
+		return group.isMemberAllowToInvite() ||
 				isAdmin(EMClient.getInstance().getCurrentUser()) ||
-				isCurrentOwner(group)) {
-			return true;
-		}
-		return false;
+				isCurrentOwner(group);
 	}
 
 	@Override
@@ -943,7 +940,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 
 						boolean[] normalVisibilities = {
 								false,      //R.id.menu_item_transfer_owner,
-								isCurrentOwner(group) ? true : false,       //R.id.menu_item_add_admin,
+								isCurrentOwner(group),       //R.id.menu_item_add_admin,
 								false,      //R.id.menu_item_rm_admin,
 								true,       //R.id.menu_item_remove_member,
 								true,       //R.id.menu_item_add_to_blacklist,
@@ -965,7 +962,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 
 						boolean[] muteListVisibilities = {
 								false,      //R.id.menu_item_transfer_owner,
-								isCurrentOwner(group) ? true : false,       //R.id.menu_item_add_admin,
+								isCurrentOwner(group),       //R.id.menu_item_add_admin,
 								false,      //R.id.menu_item_rm_admin,
 								true,       //R.id.menu_item_remove_member,
 								true,       //R.id.menu_item_add_to_blacklist,

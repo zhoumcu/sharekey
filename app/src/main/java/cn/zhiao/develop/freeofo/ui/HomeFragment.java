@@ -42,7 +42,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
     @Bind(R.id.notify)
     TextView notify;
     @Bind(R.id.btn_unlock)
-    Button btnUnlock;
+    ImageView btnUnlock;
     @Bind(R.id.btn_save)
     Button btnSave;
     @Bind(R.id.btn_light)
@@ -88,8 +88,6 @@ public class HomeFragment extends BaseFragment implements HomeView {
         logE("客户端收到推送内容" + event.getAlart());
     }
 
-    ;
-
     @Override
     protected void initPresenter() {
         presenter = new HomePresenterImpl(getContext(), this);
@@ -103,6 +101,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
                     showToast("内容不能为空！");
                     return;
                 }
+                getBaseActivity().closeKeyboard();
                 presenter.QueryData(numView.getText().toString());
                 break;
             case R.id.btn_save:

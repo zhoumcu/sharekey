@@ -292,12 +292,12 @@
         "source": "E:\\2016\\android\\FreeOfo\\redpacketlibrary\\build\\intermediates\\exploded-aar\\com.hyphenate.redpacket\\redpacket-alipay\\1.1.2\\res\\layout\\rp_open_packet_dialog.xml"
     },
     {
-        "merged": "E:\\2016\\android\\FreeOfo\\redpacketlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\rp_fragment_group_packet_detail.xml",
-        "source": "E:\\2016\\android\\FreeOfo\\redpacketlibrary\\build\\intermediates\\exploded-aar\\com.hyphenate.redpacket\\redpacket-alipay\\1.1.2\\res\\layout\\rp_fragment_group_packet_detail.xml"
-    },
-    {
         "merged": "E:\\2016\\android\\FreeOfo\\redpacketlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\ease_widget_chat_input_menu.xml",
         "source": "E:\\2016\\android\\FreeOfo\\redpacketlibrary\\build\\intermediates\\exploded-aar\\FreeOfo\\easeui\\unspecified\\res\\layout\\ease_widget_chat_input_menu.xml"
+    },
+    {
+        "merged": "E:\\2016\\android\\FreeOfo\\redpacketlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\rp_fragment_group_packet_detail.xml",
+        "source": "E:\\2016\\android\\FreeOfo\\redpacketlibrary\\build\\intermediates\\exploded-aar\\com.hyphenate.redpacket\\redpacket-alipay\\1.1.2\\res\\layout\\rp_fragment_group_packet_detail.xml"
     },
     {
         "merged": "E:\\2016\\android\\FreeOfo\\redpacketlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\em_row_red_packet_ack_message.xml",

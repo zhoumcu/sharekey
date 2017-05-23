@@ -120,7 +120,7 @@ public class MyStringUtils {
 			str = str.substring(index + splitsign.length());
 		}
 		al.add(str);
-		return (String[]) al.toArray(new String[0]);
+		return al.toArray(new String[0]);
 	}
 
 	/**
@@ -562,11 +562,7 @@ public class MyStringUtils {
 			Pattern regex = Pattern.compile(check);
 			Matcher matcher = regex.matcher(handset);
 			boolean isMatched = matcher.matches();
-			if (isMatched) {
-				return true;
-			} else {
-				return false;
-			}
+			return isMatched;
 		} catch (RuntimeException e) {
 			return false;
 		}
@@ -593,10 +589,7 @@ public class MyStringUtils {
 	public static boolean isNumeric(String str) {
 		Pattern pattern = Pattern.compile("[0-9]*");
 		Matcher isNum = pattern.matcher(str);
-		if (!isNum.matches()) {
-			return false;
-		}
-		return true;
+		return isNum.matches();
 	}
 
 	/**
@@ -643,10 +636,7 @@ public class MyStringUtils {
 	 * @return
 	 */
 	public static boolean isLenghtStrLentht(String text, int lenght) {
-		if (text.length() <= lenght)
-			return true;
-		else
-			return false;
+		return text.length() <= lenght;
 	}
 
 	/**
@@ -656,10 +646,7 @@ public class MyStringUtils {
 	 * @return
 	 */
 	public static boolean isSMSStrLentht(String text) {
-		if (text.length() <= 70)
-			return true;
-		else
-			return false;
+		return text.length() <= 70;
 	}
 
 	/**
@@ -680,18 +667,12 @@ public class MyStringUtils {
 		Pattern pattern = Pattern
 				.compile("^\\w+([-.]\\w+)*@\\w+([-]\\w+)*\\.(\\w+([-]\\w+)*\\.)*[a-z]{2,3}$");
 		Matcher matcher = pattern.matcher(email);
-		if (matcher.matches()) {
-			return true;
-		}
-		return false;
+		return matcher.matches();
 	}
 
 	// 判断微博分享是否为是否为120个
 	public static boolean isShareStrLentht(String text, int lenght) {
-		if (text.length() <= 120)
-			return true;
-		else
-			return false;
+		return text.length() <= 120;
 	}
 
 	public static String getFileNameFromUrl(String url) {

@@ -111,7 +111,7 @@ public class BaseApplication extends Application {
      */
     public static String getLanguage() {
         Locale locale = mInstance.getResources().getConfiguration().locale;
-        String language = locale.getDefault().toString();
+        String language = Locale.getDefault().toString();
         return language;
     }
 

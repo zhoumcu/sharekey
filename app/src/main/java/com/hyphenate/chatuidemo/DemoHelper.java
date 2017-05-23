@@ -314,11 +314,7 @@ public class DemoHelper {
                         notNotifyIds = demoModel.getDisabledGroups();
                     }
 
-                    if (notNotifyIds == null || !notNotifyIds.contains(chatUsename)) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+                    return notNotifyIds == null || !notNotifyIds.contains(chatUsename);
                 }
             }
         });
@@ -964,7 +960,7 @@ public class DemoHelper {
 	}
 	
 	public DemoModel getModel(){
-        return (DemoModel) demoModel;
+        return demoModel;
     }
 	
 	/**

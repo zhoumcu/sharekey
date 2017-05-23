@@ -94,7 +94,7 @@ public class EaseConversationList extends ListView {
     };
 
     public EMConversation getItem(int position) {
-        return (EMConversation)adapter.getItem(position);
+        return adapter.getItem(position);
     }
     
     public void refresh() {

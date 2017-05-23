@@ -240,7 +240,7 @@ public class PublicChatRoomsActivity extends BaseActivity {
 				});
 			}
 		}
-	};
+	}
 
 	private void loadAndShowData(){
 		new Thread(new Runnable() {

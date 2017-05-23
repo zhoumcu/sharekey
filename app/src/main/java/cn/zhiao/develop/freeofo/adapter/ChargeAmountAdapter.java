@@ -74,7 +74,7 @@ public class ChargeAmountAdapter extends RecyclerView.Adapter<ChargeAmountAdapte
     }
 
     public interface OnItemClickListener {
-        public void onItemClick(View v, int position, String s);
+        void onItemClick(View v, int position, String s);
     }
 
     public void setOnClickListener(OnItemClickListener listener) {

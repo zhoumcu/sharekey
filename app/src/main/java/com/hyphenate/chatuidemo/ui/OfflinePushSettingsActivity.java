@@ -148,7 +148,7 @@ public class OfflinePushSettingsActivity extends BaseActivity implements Compoun
         if(mPushConfigs == null)
             return;
         if(mPushConfigs.isNoDisturbOn()){
-            status = status.ON;
+            status = Status.ON;
             noDisturbOn.setChecked(true);
             if(mPushConfigs.getNoDisturbStartHour() > 0){
                 status = Status.ON_IN_NIGHT;

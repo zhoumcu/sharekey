@@ -56,12 +56,12 @@
         "source": "E:\\2016\\android\\FreeOfo\\easeui\\res\\drawable-hdpi\\ease_default_image.png"
     },
     {
-        "merged": "E:\\2016\\android\\FreeOfo\\easeui\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ease_record_animate_12.png",
-        "source": "E:\\2016\\android\\FreeOfo\\easeui\\res\\drawable-hdpi\\ease_record_animate_12.png"
-    },
-    {
         "merged": "E:\\2016\\android\\FreeOfo\\easeui\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ease_record_animate_07.png",
         "source": "E:\\2016\\android\\FreeOfo\\easeui\\res\\drawable-hdpi\\ease_record_animate_07.png"
+    },
+    {
+        "merged": "E:\\2016\\android\\FreeOfo\\easeui\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ease_record_animate_12.png",
+        "source": "E:\\2016\\android\\FreeOfo\\easeui\\res\\drawable-hdpi\\ease_record_animate_12.png"
     },
     {
         "merged": "E:\\2016\\android\\FreeOfo\\easeui\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ease_location_msg.9.png",

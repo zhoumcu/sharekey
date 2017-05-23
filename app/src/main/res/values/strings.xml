@@ -16,13 +16,13 @@
     <string name="logins">登录</string>
     <string name="click_to_skip">跳过</string>
     <string name="gdtslogan">共享密钥</string>
-    <string name="code_prompt">在车锁和车头位置，已有车辆编码,不足位数的直接留空白</string>
+    <string name="code_prompt">在车锁和车头位置，已有车辆编码</string>
     <string name="unlock_im">立即解密</string>
     <string name="lock_im">找开锁王</string>
     <string name="saves">保存密码</string>
-    <string name="notifys">好消息！！！！开锁王强势入驻！不要理会押金，不要一分钱，全国任意骑!</string>
+    <string name="notifys">好消息！加入“官方红包补贴群”领取骑车红包！陆续更新，敬请期待！</string>
     <string name="code_password">输入密码，以便下次使用</string>
-    <string name="errormsg"><![CDATA[>>呜呜，没有该数据哦！小哥正在抓紧备货。。。下个版本将推出你骑车小哥买单优惠活动，敬请期待\n再或者可以直接找开锁王开锁<<]]></string>
+    <string name="errormsg"><![CDATA[>>呜呜，没有该数据哦！小哥正在抓紧备货。。。加入“官方红包补贴群”领取骑车红包！陆续更新，敬请期待\n再或者可以直接找开锁王开锁<<]]></string>
     <string name="feedwork">点击成为开锁王</string>
     <string name="contants">（联系客服）</string>
     <string name="account_ballance"><![CDATA[账户余额&#160;0&#160;元]]></string>

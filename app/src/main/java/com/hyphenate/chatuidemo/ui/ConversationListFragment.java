@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +32,7 @@ public class ConversationListFragment extends EaseConversationListFragment{
     @Override
     protected void initView() {
         super.initView();
-        View errorView = (LinearLayout) View.inflate(getActivity(),R.layout.em_chat_neterror_item, null);
+        View errorView = View.inflate(getActivity(),R.layout.em_chat_neterror_item, null);
         errorItemContainer.addView(errorView);
         errorText = (TextView) errorView.findViewById(R.id.tv_connect_errormsg);
     }
@@ -41,6 +40,16 @@ public class ConversationListFragment extends EaseConversationListFragment{
     @Override
     protected void setUpView() {
         super.setUpView();
+        // set click listener
+//        titleBar.setLeftImageResource(R.drawable.ease_mm_title_back);
+//        titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                getActivity().moveTaskToBack(false);
+////                getActivity().finish();
+//            }
+//        });
         // register context menu
         registerForContextMenu(conversationListView);
         conversationListView.setOnItemClickListener(new OnItemClickListener() {

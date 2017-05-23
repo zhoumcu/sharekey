@@ -448,7 +448,7 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 						pd.dismiss();
 						// show login screen
 						App.getInstance().exit();
-						((MainActivity) getActivity()).finish();
+						getActivity().finish();
 						startActivity(new Intent(getActivity(), LoginAcitvity.class));
 						
 					}
